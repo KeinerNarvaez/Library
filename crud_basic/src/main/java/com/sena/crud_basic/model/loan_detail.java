@@ -5,6 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
+
 import java.time.LocalDate;
 
 @Entity(name = "loan_detail")
@@ -14,8 +19,9 @@ public class loan_detail {
     @Column(name="id_loan_detail")
     private int id_loan_detail;
       
-    @Column(name="id_bill", nullable = false)
-    private int id_bill;
+    @ManyToOne
+    @JoinColumn(name = "id_bill")
+    private bill_loan id_bill;
 
     @Column(name = "state", length = 20, nullable = false)
     private String state;
@@ -23,15 +29,22 @@ public class loan_detail {
     @Column(name="return_date", nullable = false)
     private LocalDate return_date;
     
-    @Column(name="id_book" ,nullable = false)
-    private String id_book;
+    @ManyToOne
+    @JoinColumn(name = "id_book")
+    private book id_book;
 
-    public loan_detail(int id_loan_detail, int id_bill, String state, LocalDate return_date, String id_book){
+    @OneToOne
+    @JoinColumn(name = "id_user_rol")
+    private user_rol id_user_rol;
+    
+
+    public loan_detail(int id_loan_detail, bill_loan id_bill, String state, LocalDate return_date, book id_book, user_rol id_user_rol){
         this.id_loan_detail=id_loan_detail;
         this.id_bill=id_bill;
         this.state=state;
         this.return_date=return_date;
         this.id_book=id_book;
+        this.id_user_rol=id_user_rol;
     }
     public void set_id_loan_detail(int id_loan_detail) {
         this.id_loan_detail = id_loan_detail;
@@ -39,12 +52,18 @@ public class loan_detail {
     public int get_id_loan_detail(){
         return id_loan_detail;
     }
-    public void set_id_bill(int id_bill) {
+    public void set_id_bill(bill_loan id_bill) {
         this.id_bill = id_bill;
-    }
-    public int get_id_bill(){
+        }
+    public bill_loan get_id_bill(){
         return id_bill;
-    }
+        }
+    public void set_id_user_rol(user_rol id_user_rol) {
+        this.id_user_rol = id_user_rol;
+        }
+    public user_rol get_id_user_rol(){
+        return id_user_rol;
+        }
     public void set_state(String state) {
         this.state = state;
     }
@@ -57,10 +76,10 @@ public class loan_detail {
     public LocalDate get_return_date(){
         return return_date;
     }
-    public void set_id_book(String id_book) {
+    public void set_id_book(book id_book) {
         this.id_book = id_book;
     }
-    public String get_id_book(){
+    public book get_id_book(){
         return id_book;
     }
 }

@@ -256,6 +256,7 @@ button {
     font-size: 18px;
     color: #000;
     padding-left: 30px;
+
 }
 
 .banner_section {
@@ -263,6 +264,9 @@ button {
     float: left;
     background: linear-gradient(110deg, #3c0e0e 55%, rgba(60, 90, 90, 0) 55%), url(https://resizer.glanacion.com/resizer/v2/credito-QS3KNYFVIFHPJLNBGX45PZCZSM.jpg?auth=50f38491ae3193337eeec020a127bcabf02e8cf5fade7ed15dd8923181e7d2a1&width=768&quality=70&smart=false);
     position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
     padding-bottom: 90px;
 }
 
@@ -565,7 +569,17 @@ button {
 
 .movies_main {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.iamge_movies_main {
+    width: 100%;
+    display: flex;
+}
+.iamge_movies {
+    width: 100%;
     float: left;
+    margin: 0px 13px;
 }
 
 .image_3 {
@@ -829,16 +843,9 @@ input.email_text::placeholder {
     padding: 25px 5px 0px 5px;
 }
 
-.iamge_movies_main {
-    width: 100%;
-    display: flex;
-}
 
-.iamge_movies {
-    width: 100%;
-    float: left;
-    margin: 0px 13px;
-}
+
+
 
 .copyright_section {
     width: 100%;
