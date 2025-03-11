@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./css/register.css">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <!-- style css -->
@@ -21,18 +26,11 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <style>
-        body {
-            background:url(./images/fondoLogin.png ) no-repeat center center fixed;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-    </style>
+    <title>FORMULARIO DE REGISTRO E INICIO SESIÓN</title>
 </head>
 <body>
-  <!-- header section start -->
-  <div class="header_section">
+      <!-- header section start -->
+  <div class="header_section" style="position: fixed; top: 0; left: 0; right: 0; z-index: 100;">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
        <a class="logo" href="index.html"><img src="images/b650f9cb-a484-424a-984d-117c6dd42023.webp" style="width:40%; max-width:300px;"></a>
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,70 +53,97 @@
        </div>
     </nav>
  </div>
- <!-- header section end -->
-<!-- Login 13 - Bootstrap Brain Component -->
-<section class="t py-3 py-md-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-        <div class="card border border-light-subtle rounded-3 shadow-sm">
-          <div class="card-body p-3 p-md-4 p-xl-5">
-            <div class="text-center mb-3">
-              <a href="#!">
-                <img src="./images/b650f9cb-a484-424a-984d-117c6dd42023.webp" alt="Logo" width="50%" height="30%">
-              </a>
+ <!-- header section end -->       
+    <div class="container-form register">
+        <div class="information">
+            <div class="info-childs">
+                <h2>Bienvenido</h2>
+                <p>Para unirte a nuestra comunidad por favor Inicia Sesión con tus datos</p>
+                <input type="button" value="Iniciar Sesión" id="sign-in">
             </div>
-            <form action="#!">
-              <div class="row gy-2 overflow-hidden">
-                <div class="col-12">
-                  <div class="form-floating mb-3">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
-                    <label for="email" class="form-label">Correo electrónico</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-floating mb-3">
-                    <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
-                    <label for="password" class="form-label">Contraseña</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="d-flex gap-2 justify-content-between">
-                    <a href="#!" class="link-primary text-decoration-none">¿Has olvidado tu contraseña?</a>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="d-grid my-3">
-                    <button class="btn btn-primary btn-lg" type="submit">Iniciar sesión</button>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <p class="m-0 text-secondary text-center">¿No tienes una cuenta? <a href="#!" class="link-primary text-decoration-none">Regístrate</a></p>
-                </div>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>Crear una Cuenta</h2>
+                <div class="icons">
+                    <i class='bx bxl-google'></i>
+                    <i class='bx bxl-github'></i>
+                    <i class='bx bxl-linkedin' ></i>
+                </div>
+                <p>o usa tu email para registrarte</p>
+                <form class="form form-register" novalidate>
+                    <div>
+                        <label>
+                            <i class='bx bx-user' ></i>
+                            <input type="text" placeholder="Nombre Usuario" name="userName" >
+                        </label>
+                    </div>
+                    <div>
+                        <label >
+                            <i class='bx bx-envelope' ></i>
+                            <input type="email" placeholder="Correo Electronico" name="userEmail" >
+                        </label>
+                    </div>
+                   <div>
+                        <label>
+                            <i class='bx bx-lock-alt' ></i>
+                            <input type="password" placeholder="Contraseña" name="userPassword">
+                        </label>
+                   </div>
+                   
+                    <input type="submit" value="Registrarse">
+                    <div class="alerta-error">Todos los campos son obligatorios</div>
+                    <div class="alerta-exito">Te registraste correctamente</div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
-</section>
-      <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
-      <!-- javascript --> 
-      <script src="js/owl.carousel.js"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-      <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-      <script>
-         $('#datepicker').datepicker({
-             uiLibrary: 'bootstrap4'
-         });
-      </script>
+
+
+    <div class="container-form login hide">
+        <div class="information">
+            <div class="info-childs">
+                <h2>¡¡Bienvenido nuevamente!!</h2>
+                <p>Para unirte a nuestra comunidad por favor Inicia Sesión con tus datos</p>
+                <input type="button" value="Registrarse" id="sign-up">
+            </div>
+        </div>
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>Iniciar Sesión</h2>
+                <div class="icons">
+                    <i class='bx bxl-google'></i>
+                    <i class='bx bxl-github'></i>
+                    <i class='bx bxl-linkedin' ></i>
+                </div>
+                <p>o Iniciar Sesión con una cuenta</p>
+                <form class="form form-login"novalidate>
+                    <div>
+                        <label >
+                            <i class='bx bx-envelope' ></i>
+                            <input type="email" placeholder="Correo Electronico" name="userPassword">
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <i class='bx bx-lock-alt' ></i>
+                            <input type="password" placeholder="Contraseña" name="userPassword">
+                        </label>
+                    </div>
+                    <input type="submit" value="Iniciar Sesión">
+                    <div class="alerta-error">Todos los campos son obligatorios</div>
+                    <div class="alerta-exito">Te registraste correctamente</div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;">
+        <svg width="100%" height="300" viewBox="0 0 1440 300" style="height: 100%; width:100%;" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,200 C400,100 1000,300 1440,150 L1440,300 L0,300 Z" fill="#fffecb"/>
+          </svg>  
+    </footer>
+    <script src="js/script.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/login.js"></script>
 </body>
 </html>
