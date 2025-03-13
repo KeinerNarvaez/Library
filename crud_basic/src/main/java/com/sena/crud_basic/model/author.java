@@ -22,13 +22,16 @@ public class author {
     @Column(name="id_author")
     private int id_author;
     
-    @Column(name="author_name", length = 20, nullable = false)
+    @Column(name="author_name", length = 50, nullable = false)
     private String author_name;
 
     @Lob
     @Column(name="biography", length = 500, nullable = false)
     private String biography;
+   // constructor
+    public author() {
 
+    }
     public author(int author, String author_name, String biography){
         this.id_author=author;
         this.author_name=author_name;

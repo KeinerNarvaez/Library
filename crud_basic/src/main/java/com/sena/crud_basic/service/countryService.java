@@ -1,10 +1,16 @@
 package com.sena.crud_basic.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.sena.crud_basic.DTO.countryDTO;
+import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.repository.Icountry;
+import com.sena.crud_basic.model.country;
 import com.sena.crud_basic.model.country;
 
 
@@ -13,10 +19,46 @@ public class countryService {
   @Autowired
    private Icountry data;
 
-   public void save(countryDTO countryDTO) {
-      country country_Registro = converToModel(countryDTO);
-      data.save(country_Registro);
+   public List<country> findAll() {
+      return data.findAll();
    }
+
+   public Optional<country> findById(int id) {
+      return data.findById(id);
+   }
+
+   public responseDTO deletecountry(int id) {
+      if (!findById(id).isPresent()) {
+         responseDTO respuesta = new responseDTO(
+               HttpStatus.OK.toString(),
+               "The register does not exist");
+         return respuesta;
+   }
+      data.deleteById(id);
+        responseDTO respuesta = new responseDTO(
+            HttpStatus.OK.toString(),
+            "It was deleted correctly");
+        return respuesta;
+   }
+       // register and update
+   public responseDTO save(countryDTO countryDTO) {
+         // validación longitud del nombre
+         if (countryDTO.get_country().length() < 1 ||
+                 countryDTO.get_country().length() > 50) {
+             responseDTO respuesta = new responseDTO(
+                     HttpStatus.BAD_REQUEST.toString(),
+                     "El nombre debe estar entre 1 y 50 caracteres");
+             return respuesta;
+         }
+         // otras condiciones
+         // n
+         country country_Registro = converToModel(countryDTO);
+         data.save(country_Registro);
+         responseDTO respuesta = new responseDTO(
+                 HttpStatus.OK.toString(),
+                 "Se guardó correctamente");
+         return respuesta;
+     }
    public countryDTO convertToDTO(country country) {
       countryDTO countryDTO = new countryDTO(
          country.get_id_country(),

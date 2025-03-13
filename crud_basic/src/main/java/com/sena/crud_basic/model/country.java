@@ -21,6 +21,10 @@ public class country {
         this.country=country;
     }
 
+    public country() {
+
+    }
+
     public void set_id_country(int id_country) {
         this.id_country = id_country;
     }

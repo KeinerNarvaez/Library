@@ -19,7 +19,9 @@ public class genre {
     public genre(int id_genre, String genre){
         this.id_genre=id_genre;
         this.genre=genre;
-    }    
+    } 
+    public genre(){
+    }
     public void set_id_genre(int id_genre) {
         this.id_genre = id_genre;
     }
