@@ -1,5 +1,7 @@
 package com.sena.crud_basic.DTO;
+
 import com.sena.crud_basic.model.country;
+
 public class editorialDTO {
 private int id_editorial;
 private String editorial;

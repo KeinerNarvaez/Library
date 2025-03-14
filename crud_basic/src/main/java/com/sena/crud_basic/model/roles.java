@@ -27,6 +27,9 @@ public class roles {
         this.name_rol = name_rol;
      }
 
+     public roles(){
+     }
+
      public int getid_roles() {
         return id_roles;
      }

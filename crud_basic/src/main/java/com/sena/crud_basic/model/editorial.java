@@ -28,6 +28,9 @@ public editorial(int id_editorial, String editorial, country id_country, String 
     this.id_country=id_country;
     this.description=description;
     }
+    
+    public editorial(){
+    }
     public void set_id_editorial(int id_editorial) {
         this.id_editorial = id_editorial;
     }
