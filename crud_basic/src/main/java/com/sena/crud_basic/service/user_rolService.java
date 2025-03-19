@@ -16,6 +16,9 @@ public class user_rolService {
       user_rol user_rolRegister = converToModel(user_rolDTO);
       data.save(user_rolRegister);
    }
+   public user_rol findById(int id) {
+      return data.findById(id).orElse(null);  // Retorna el user_rol o null si no existe
+  }
    public user_rolDTO convertToDTO(user_rol user_rol) {
       user_rolDTO user_rolDTO = new user_rolDTO(
       user_rol.get_id_user_rol(),

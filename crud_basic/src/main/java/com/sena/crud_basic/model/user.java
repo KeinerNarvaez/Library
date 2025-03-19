@@ -45,6 +45,10 @@ public class user {
       this.fecha_registro = fecha_registro;
    }
 
+   public user(){
+      
+   }
+
    // get del ID
    public int getId_usuario() {
       return id_usuario;

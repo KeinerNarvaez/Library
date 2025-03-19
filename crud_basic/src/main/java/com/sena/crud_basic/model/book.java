@@ -40,6 +40,8 @@ public class book {
         this.id_author_book=id_author_book;
         this.id_book_genre=id_book_genre;
     }
+    public book(){
+    }
     public void set_id_book(int id_book) {
         this.id_book = id_book;
     }

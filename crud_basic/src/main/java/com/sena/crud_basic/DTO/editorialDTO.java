@@ -1,13 +1,11 @@
 package com.sena.crud_basic.DTO;
 
-import com.sena.crud_basic.model.country;
-
 public class editorialDTO {
 private int id_editorial;
 private String editorial;
-private country id_country;
+private int id_country;
 private String description;
-public editorialDTO(int id_editorial, String editorial, country id_country, String description){
+public editorialDTO(int id_editorial, String editorial, int id_country, String description){
     this.id_editorial=id_editorial;
     this.editorial=editorial;
     this.id_country=id_country;
@@ -25,10 +23,10 @@ public editorialDTO(int id_editorial, String editorial, country id_country, Stri
     public String get_editorial(){
         return editorial;
     }
-    public void set_id_country(country id_country) {
+    public void set_id_country(int id_country) {
         this.id_country = id_country;
     }
-    public country get_id_country(){
+    public int get_id_country(){
         return id_country;
     }
     public void set_description(String description) {

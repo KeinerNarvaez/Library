@@ -32,6 +32,9 @@ public class user_rol {
       this.user = user;
       this.id_rol = id_rol;
    }
+   public user_rol(){
+      
+   }
    public void set_id_user_rol(int id_user_rol) {
       this.id_user_rol = id_user_rol;
    }

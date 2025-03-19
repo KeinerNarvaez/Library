@@ -27,6 +27,8 @@ public class book_genre {
         this.genre = genre;
         this.id_book = id_book;
     }
+    public book_genre(){
+    }
     public void set_id_book_genre(int id_book_genre) {
         this.id_book_genre = id_book_genre;
     }

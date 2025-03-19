@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GenerationType;
 
@@ -20,6 +21,7 @@ private String editorial;
 @ManyToOne
 @JoinColumn(name = "id_country")
 private country id_country;
+@Lob
 @Column(name="description", length = 20, nullable = false)
 private String description;
 public editorial(int id_editorial, String editorial, country id_country, String description){

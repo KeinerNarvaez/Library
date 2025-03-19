@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.editorialDTO;
 import com.sena.crud_basic.service.editorialService;
-import com.sena.crud_basic.service.countryService;
+
 
 
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +43,8 @@ public class editorialController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteeditorial(@PathVariable int id) {
-        var message= editorialService.deleteeditorial(id); 
+    public ResponseEntity<Object> delete(@PathVariable int id) {
+        var message= editorialService.delete(id); 
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

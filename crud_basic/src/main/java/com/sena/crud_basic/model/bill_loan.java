@@ -39,6 +39,8 @@ public class bill_loan {
         this.date=date;
         this.id_user_rol=id_user_rol;
     }
+    public bill_loan(){
+    }
     public void set_id_bill(int id_bill) {
         this.id_bill = id_bill;
     }

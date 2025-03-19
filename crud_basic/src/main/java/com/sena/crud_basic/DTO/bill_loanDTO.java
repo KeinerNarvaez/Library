@@ -1,15 +1,14 @@
 package com.sena.crud_basic.DTO;
 import java.time.LocalDate;
-import com.sena.crud_basic.model.user_rol;
 public class bill_loanDTO {
 
     private int id_bill;
-    private user_rol id_user_rol;
+    private int id_user_rol;
     private String state;
     private String code;
     private LocalDate date;
 
-    public bill_loanDTO(int id_bill, String state, String code, LocalDate date, user_rol id_user_rol){
+    public bill_loanDTO(int id_bill, String state, String code, LocalDate date, int id_user_rol){
         this.id_bill=id_bill;
         this.state=state;
         this.code=code;
@@ -22,11 +21,11 @@ public class bill_loanDTO {
     }
     public int get_id_bill(){
         return id_bill;
-    }                                                                                                   
-    public void set_id_user_rol(user_rol id_user_rol) {
+    }                                                                                  
+    public void set_id_user_rol(int id_user_rol) {
         this.id_user_rol = id_user_rol;
     }
-    public user_rol get_id_user_rol(){
+    public int get_id_user_rol(){
         return id_user_rol;
     }
     public void set_state(String state) {
