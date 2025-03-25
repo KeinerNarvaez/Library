@@ -28,13 +28,13 @@ public class genreService {
    public responseDTO deletegenre(int id) {
       if (!findById(id).isPresent()) {
          responseDTO respuesta = new responseDTO(
-               HttpStatus.OK.toString(),
+               HttpStatus.OK,
                "The register does not exist");
          return respuesta;
    }
       data.deleteById(id);
         responseDTO respuesta = new responseDTO(
-            HttpStatus.OK.toString(),
+            HttpStatus.OK,
             "It was deleted correctly");
         return respuesta;
    }
@@ -44,7 +44,7 @@ public class genreService {
         if (genreDTO.get_genre().length() < 1 ||
                 genreDTO.get_genre().length() > 50) {
             responseDTO respuesta = new responseDTO(
-                    HttpStatus.BAD_REQUEST.toString(),
+                    HttpStatus.BAD_REQUEST,
                     "El nombre debe estar entre 1 y 50 caracteres");
             return respuesta;
         }
@@ -53,7 +53,7 @@ public class genreService {
         genre genre_Registro = converToModel(genreDTO);
         data.save(genre_Registro);
         responseDTO respuesta = new responseDTO(
-                HttpStatus.OK.toString(),
+                HttpStatus.OK,
                 "Se guardó correctamente");
         return respuesta;
 

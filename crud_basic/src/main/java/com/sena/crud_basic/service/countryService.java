@@ -30,13 +30,13 @@ public class countryService {
    public responseDTO deletecountry(int id) {
       if (!findById(id).isPresent()) {
          responseDTO respuesta = new responseDTO(
-               HttpStatus.OK.toString(),
+               HttpStatus.OK,
                "The register does not exist");
          return respuesta;
    }
       data.deleteById(id);
         responseDTO respuesta = new responseDTO(
-            HttpStatus.OK.toString(),
+            HttpStatus.OK,
             "It was deleted correctly");
         return respuesta;
    }
@@ -46,7 +46,7 @@ public class countryService {
          if (countryDTO.get_country().length() < 1 ||
                  countryDTO.get_country().length() > 50) {
              responseDTO respuesta = new responseDTO(
-                     HttpStatus.BAD_REQUEST.toString(),
+                     HttpStatus.BAD_REQUEST,
                      "El nombre debe estar entre 1 y 50 caracteres");
              return respuesta;
          }
@@ -55,7 +55,7 @@ public class countryService {
          country country_Registro = converToModel(countryDTO);
          data.save(country_Registro);
          responseDTO respuesta = new responseDTO(
-                 HttpStatus.OK.toString(),
+                 HttpStatus.OK,
                  "Se guardó correctamente");
          return respuesta;
      }

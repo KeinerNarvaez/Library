@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.authorDTO;
+import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.service.authorService;
 
 
@@ -30,8 +31,8 @@ public class authorController {
 
     @PostMapping("/")
     public ResponseEntity<Object> registerauthor(@RequestBody authorDTO author) {
-        authorService.save(author);
-        return new ResponseEntity<>("register OK", HttpStatus.OK);
+        responseDTO respuesta = authorService.save(author);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
         /*
      * Se requiere un dato, el ID

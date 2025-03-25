@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.bookDTO;
+import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.service.bookService;
 
 
@@ -29,8 +30,14 @@ public class bookController {
 
     @PostMapping("/")
     public ResponseEntity<Object> registerbook(@RequestBody bookDTO book) {
-        bookService.save(book);
-        return new ResponseEntity<>("register OK", HttpStatus.OK);
+        responseDTO respuesta = bookService.save(book);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
+    }
+    @GetMapping("/")
+    public ResponseEntity<Object> getAllUser() {
+        var lista = bookService.findAll();
+        // List<user> listaUsuariO2= userService.findAll();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
     }
         @GetMapping("/{id}")
     public ResponseEntity<Object> getOnebook(@PathVariable int id) {

@@ -28,17 +28,13 @@ public class book {
     @JoinColumn(name = "id_author_book")
     private author id_author_book;
 
-    @ManyToOne
-    @JoinColumn(name = "id_genre")
-    private book_genre id_book_genre;
 
-    public book(int id_book, String name_book, country id_country, editorial id_editorial, author id_author_book, book_genre id_book_genre){
+    public book(int id_book, String name_book, country id_country, editorial id_editorial, author id_author_book){
         this.id_book=id_book;
         this.name_book=name_book;
         this.id_country=id_country;
         this.id_editorial=id_editorial;
         this.id_author_book=id_author_book;
-        this.id_book_genre=id_book_genre;
     }
     public book(){
     }
@@ -71,11 +67,5 @@ public class book {
     }
     public author get_id_author_book(){
         return id_author_book;
-    }
-    public void set_id_book_genre(book_genre id_book_genre) {
-        this.id_book_genre = id_book_genre;
-    }
-    public book_genre get_id_book_genre(){
-        return id_book_genre;
     }
 }

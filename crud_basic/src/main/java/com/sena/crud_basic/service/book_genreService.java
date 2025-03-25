@@ -34,13 +34,13 @@ public class book_genreService {
         Optional<book_genre> book_genreOptional = findById(id);
         if (!book_genreOptional.isPresent()) {
             return new responseDTO(
-                HttpStatus.NOT_FOUND.toString(),
+                HttpStatus.NOT_FOUND,
                 "The register does not exist"
             );
         }
         book_genreRepository.deleteById(id);
         return new responseDTO(
-            HttpStatus.OK.toString(),
+            HttpStatus.OK,
             "It was deleted correctly"
         );
     }
@@ -49,7 +49,7 @@ public class book_genreService {
       Optional<genre> genreOptional = genreService.findById(book_genreDTO.get_id_genre());
       if (!genreOptional.isPresent()) {
           return new responseDTO(
-              HttpStatus.NOT_FOUND.toString(),
+              HttpStatus.NOT_FOUND,
               "The genre with ID " + book_genreDTO.get_id_genre() + " does not exist."
           );
       }
@@ -58,7 +58,7 @@ public class book_genreService {
       Optional<book> bookOptional = bookService.findById(book_genreDTO.get_id_book());
       if (!bookOptional.isPresent()) {
           return new responseDTO(
-              HttpStatus.NOT_FOUND.toString(),
+              HttpStatus.NOT_FOUND,
               "The book with ID " + book_genreDTO.get_id_book() + " does not exist."
           );
       }
@@ -72,7 +72,7 @@ public class book_genreService {
      
   
       book_genreRepository.save(book_genreRecord);
-      return new responseDTO(HttpStatus.OK.toString(), "Book genre saved correctly.");
+      return new responseDTO(HttpStatus.OK, "Book genre saved correctly.");
   }
   
   public book_genreDTO convertToDTO(book_genre book_genre) {

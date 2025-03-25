@@ -1,10 +1,10 @@
 package com.sena.crud_basic.DTO;
-
+import org.springframework.http.HttpStatus;
 public class responseDTO {
     private String message;
-    private String status;
+    private HttpStatus status;
 
-    public responseDTO(String message, String status) {
+    public responseDTO( HttpStatus status,String message) {
         this.message = message;
         this.status = status;
     }
@@ -16,11 +16,11 @@ public class responseDTO {
         this.message = message;
     }
 
-    public String getStatus() {
+    public HttpStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(HttpStatus status) {
         this.status = status;
     }   
 }

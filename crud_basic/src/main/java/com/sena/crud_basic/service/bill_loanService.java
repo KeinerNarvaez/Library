@@ -34,10 +34,10 @@ public class bill_loanService {
     public responseDTO delete(int id) {
         Optional<bill_loan> billLoan = findById(id);
         if (!billLoan.isPresent()) {
-            return new responseDTO(HttpStatus.NOT_FOUND.toString(), "La factura de préstamo no existe.");
+            return new responseDTO(HttpStatus.NOT_FOUND, "La factura de préstamo no existe.");
         }
         billLoanRepository.deleteById(id);
-        return new responseDTO(HttpStatus.OK.toString(), "Factura de préstamo eliminada correctamente.");
+        return new responseDTO(HttpStatus.OK, "Factura de préstamo eliminada correctamente.");
     }
 
     public responseDTO save(bill_loanDTO bill_loanDTO) {
@@ -45,9 +45,9 @@ public class bill_loanService {
         if (userRol != null) {
             bill_loan billLoan = convertToModel(bill_loanDTO, userRol);
             billLoanRepository.save(billLoan);
-            return new responseDTO(HttpStatus.OK.toString(), "Factura de préstamo guardada correctamente.");
+            return new responseDTO(HttpStatus.OK, "Factura de préstamo guardada correctamente.");
         } else {
-            return new responseDTO(HttpStatus.BAD_REQUEST.toString(),
+            return new responseDTO(HttpStatus.BAD_REQUEST,
                     "User_rol con ID " + bill_loanDTO.get_id_user_rol() + " no encontrado.");
         }
     }

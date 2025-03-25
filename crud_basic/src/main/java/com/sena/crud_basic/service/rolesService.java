@@ -29,13 +29,13 @@ public class rolesService {
     public responseDTO deleteroles(int id) {
         if (!findById(id).isPresent()) {
             responseDTO respuesta = new responseDTO(
-                    HttpStatus.OK.toString(),
+                    HttpStatus.OK,
                     "The register does not exist");
             return respuesta;
         }
         data.deleteById(id);
         responseDTO respuesta = new responseDTO(
-                HttpStatus.OK.toString(),
+                HttpStatus.OK,
                 "It was deleted correctly");
         return respuesta;
     }
@@ -44,7 +44,7 @@ public class rolesService {
         if (rolesDTO.get_name_rol().length() < 1 ||
                 rolesDTO.get_name_rol().length() > 50) {
             responseDTO respuesta = new responseDTO(
-                    HttpStatus.BAD_REQUEST.toString(),
+                    HttpStatus.BAD_REQUEST,
                     "El nombre debe estar entre 1 y 50 caracteres");
             return respuesta;
         }
@@ -53,7 +53,7 @@ public class rolesService {
         roles roles_Registro = converToModel(rolesDTO);
         data.save(roles_Registro);
         responseDTO respuesta = new responseDTO(
-                HttpStatus.OK.toString(),
+                HttpStatus.OK,
                 "Se guardó correctamente");
         return respuesta;
 
