@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.bill_loanDTO;
+import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.service.bill_loanService;
 
 
@@ -29,8 +30,8 @@ public class bill_loanController {
 
     @PostMapping("/")
     public ResponseEntity<Object> registerbill_loan(@RequestBody bill_loanDTO bill_loan) {
-        bill_loanService.save(bill_loan);
-        return new ResponseEntity<>("register OK", HttpStatus.OK);
+        responseDTO respuesta = bill_loanService.save(bill_loan);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
 
 

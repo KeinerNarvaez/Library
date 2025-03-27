@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.genreDTO;
+import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.service.genreService;
 
 
@@ -30,8 +31,8 @@ public class genreController {
 
     @PostMapping("/")
     public ResponseEntity<Object> registergenre(@RequestBody genreDTO genre) {
-        genreService.save(genre);
-        return new ResponseEntity<>("register OK", HttpStatus.OK);
+        responseDTO respuesta = genreService.save(genre);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
             /*
      * Se requiere un dato, el ID

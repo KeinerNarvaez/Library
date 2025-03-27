@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.editorialDTO;
+import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.service.editorialService;
 
 
@@ -31,8 +32,8 @@ public class editorialController {
 
     @PostMapping("/")
     public ResponseEntity<Object> registereditorial(@RequestBody editorialDTO editorial) {
-        editorialService.save(editorial);
-        return new ResponseEntity<>("register OK", HttpStatus.OK);
+        responseDTO respuesta = editorialService.save(editorial);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
         @GetMapping("/{id}")
     public ResponseEntity<Object> getOneeditorial(@PathVariable int id) {

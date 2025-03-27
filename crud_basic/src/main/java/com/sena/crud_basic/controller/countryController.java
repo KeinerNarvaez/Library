@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.countryDTO;
+import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.service.countryService;
 
 
@@ -29,8 +30,8 @@ public class countryController {
 
     @PostMapping("/")
     public ResponseEntity<Object> registereditorial(@RequestBody countryDTO country) {
-        countryService.save(country);
-        return new ResponseEntity<>("register OK", HttpStatus.OK);
+        responseDTO respuesta = countryService.save(country);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
 
             /*

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.DTO.rolesDTO;
 import com.sena.crud_basic.service.rolesService;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +28,8 @@ public class rolesController {
 
     @PostMapping("/")
     public ResponseEntity<Object> registerroles(@RequestBody rolesDTO roles) {
-        rolesService.save(roles);
-        return new ResponseEntity<>("register OK", HttpStatus.OK);
+        responseDTO respuesta = rolesService.save(roles);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
         @GetMapping("/{id}")
     public ResponseEntity<Object> getOneroles(@PathVariable int id) {
