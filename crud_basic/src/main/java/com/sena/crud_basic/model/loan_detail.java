@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+
 
 
 import java.time.LocalDate;
@@ -33,18 +33,17 @@ public class loan_detail {
     @JoinColumn(name = "id_book")
     private book id_book;
 
-    @OneToOne
-    @JoinColumn(name = "id_user_rol")
-    private user_rol id_user_rol;
     
 
-    public loan_detail(int id_loan_detail, bill_loan id_bill, String state, LocalDate return_date, book id_book, user_rol id_user_rol){
+    public loan_detail(int id_loan_detail, bill_loan id_bill, String state, LocalDate return_date, book id_book){
         this.id_loan_detail=id_loan_detail;
         this.id_bill=id_bill;
         this.state=state;
         this.return_date=return_date;
         this.id_book=id_book;
-        this.id_user_rol=id_user_rol;
+    }
+    public loan_detail(){
+        
     }
     public void set_id_loan_detail(int id_loan_detail) {
         this.id_loan_detail = id_loan_detail;
@@ -57,13 +56,7 @@ public class loan_detail {
         }
     public bill_loan get_id_bill(){
         return id_bill;
-        }
-    public void set_id_user_rol(user_rol id_user_rol) {
-        this.id_user_rol = id_user_rol;
-        }
-    public user_rol get_id_user_rol(){
-        return id_user_rol;
-        }
+    }
     public void set_state(String state) {
         this.state = state;
     }

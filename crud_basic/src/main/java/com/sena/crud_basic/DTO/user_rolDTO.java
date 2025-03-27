@@ -1,13 +1,9 @@
 package com.sena.crud_basic.DTO;
-
-import com.sena.crud_basic.model.roles;
-import com.sena.crud_basic.model.user;
-
 public class user_rolDTO {
    private int id_user_rol;
-   private user user;
-   private roles id_rol;
-   public user_rolDTO(int id_user_rol,com.sena.crud_basic.model.user user, roles id_rol) {
+   private int user;
+   private int id_rol;
+   public user_rolDTO(int id_user_rol,int user, int id_rol) {
       this.id_user_rol = id_user_rol;
       this.user = user;
       this.id_rol = id_rol;
@@ -20,19 +16,19 @@ public class user_rolDTO {
       return id_user_rol;
    }
 
-   public user getUser() {
+   public int getUser() {
       return user;
    }
 
-   public void setUser(user user) {
+   public void setUser(int user) {
       this.user = user;
    }
 
-   public roles get_name_rol() {
+   public int get_name_rol() {
       return id_rol;
    }
 
-   public void set_name_rol(roles id_rol) {
+   public void set_name_rol(int id_rol) {
       this.id_rol = id_rol;
    }
 }

@@ -34,7 +34,7 @@ public class genreController {
         responseDTO respuesta = genreService.save(genre);
         return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
-            /*
+     /*
      * Se requiere un dato, el ID
      * PathVariable=captura de información por la URL
      */

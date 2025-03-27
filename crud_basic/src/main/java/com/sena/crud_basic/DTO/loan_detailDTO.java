@@ -1,21 +1,19 @@
 package com.sena.crud_basic.DTO;
 import java.time.LocalDate;
-import com.sena.crud_basic.model.book;
 
 public class loan_detailDTO {
     private int id_loan_detail;
     private int id_bill;
     private String state;
     private LocalDate return_date;
-    private book id_book;
-    private int id_user_rol;
-    public loan_detailDTO(int id_loan_detail, int id_bill, String state, LocalDate return_date, book id_book, int id_user_rol){
+    private int id_book;
+
+    public loan_detailDTO(int id_loan_detail, int id_bill, String state, LocalDate return_date, int id_book){
         this.id_loan_detail=id_loan_detail;
         this.id_bill=id_bill;
         this.state=state;
         this.return_date=return_date;
         this.id_book=id_book;
-        this.id_user_rol=id_user_rol;
     }
     public void set_id_loan_detail(int id_loan_detail) {
         this.id_loan_detail = id_loan_detail;
@@ -28,13 +26,7 @@ public class loan_detailDTO {
         }
     public int get_id_bill(){
         return id_bill;
-        }
-    public void set_id_user_rol(int id_user_rol) {
-        this.id_user_rol = id_user_rol;
-        }
-    public int get_id_user_rol(){
-        return id_user_rol;
-        }
+    }
     public void set_state(String state) {
         this.state = state;
     }
@@ -47,10 +39,10 @@ public class loan_detailDTO {
     public LocalDate get_return_date(){
         return return_date;
     }
-    public void set_id_book(book id_book) {
+    public void set_id_book(int id_book) {
         this.id_book = id_book;
     }
-    public book get_id_book(){
+    public int get_id_book(){
         return id_book;
     }
 }

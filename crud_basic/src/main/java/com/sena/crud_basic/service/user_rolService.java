@@ -1,8 +1,11 @@
 package com.sena.crud_basic.service;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sena.crud_basic.DTO.user_rolDTO;
+
 import com.sena.crud_basic.model.user_rol;
 import com.sena.crud_basic.repository.Iuser_rol;
 
@@ -11,13 +14,14 @@ import com.sena.crud_basic.repository.Iuser_rol;
 public class user_rolService {
    @Autowired
    private Iuser_rol data;
-
+   
+   
    public void save(user_rolDTO user_rolDTO) {
       user_rol user_rolRegister = converToModel(user_rolDTO);
       data.save(user_rolRegister);
    }
    public user_rol findById(int id) {
-      return data.findById(id).orElse(null);  // Retorna el user_rol o null si no existe
+      return data.findById(id).orElse(null);  
   }
    public user_rolDTO convertToDTO(user_rol user_rol) {
       user_rolDTO user_rolDTO = new user_rolDTO(
