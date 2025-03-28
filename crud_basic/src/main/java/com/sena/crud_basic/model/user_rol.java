@@ -20,7 +20,7 @@ public class user_rol {
    private int id_user_rol;
    
    @ManyToOne
-   @JoinColumn(name = "id_usuario")
+   @JoinColumn(name = "id_user")
    private user user;
 
    @ManyToOne
@@ -43,19 +43,20 @@ public class user_rol {
       return id_user_rol;
    }
 
-   public user getUser() {
-      return user;
-   }
-
    public void setUser(user user) {
       this.user = user;
    }
 
-   public roles get_name_rol() {
-      return id_rol;
+   public user getUser() {
+      return user;
    }
 
-   public void set_name_rol(roles id_rol) {
+
+   public void set_id_rol(roles id_rol) {
       this.id_rol = id_rol;
+   }
+
+   public roles get_id_rol() {
+      return id_rol;
    }
 }

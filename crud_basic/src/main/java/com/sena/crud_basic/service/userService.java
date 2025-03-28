@@ -8,6 +8,7 @@ import com.sena.crud_basic.model.user;
 import com.sena.crud_basic.repository.Iuser;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class userService {
@@ -21,6 +22,9 @@ public class userService {
     /* establish connection with the interface */
     @Autowired
     private Iuser data;
+       public Optional<user> findById(int id) {
+        return data.findById(id);
+   }
 
     // register and update
     public void save(userDTO userDTO) {

@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import com.sena.crud_basic.DTO.bill_loanDTO;
 import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.model.bill_loan;
@@ -41,15 +40,17 @@ public class bill_loanService {
     }
 
     public responseDTO save(bill_loanDTO bill_loanDTO) {
-        user_rol userRol = user_rolService.findById(bill_loanDTO.get_id_user_rol());
-        if (userRol != null) {
-            bill_loan billLoan = convertToModel(bill_loanDTO, userRol);
-            billLoanRepository.save(billLoan);
-            return new responseDTO(HttpStatus.OK, "Factura de préstamo guardada correctamente.");
-        } else {
-            return new responseDTO(HttpStatus.BAD_REQUEST,
-                    "User_rol con ID " + bill_loanDTO.get_id_user_rol() + " no encontrado.");
+        Optional<user_rol> user_rolOptional = user_rolService.findById(bill_loanDTO.get_id_user_rol());
+        if (!user_rolOptional.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "The user_rol with ID " + bill_loanDTO.get_id_user_rol() + " does not exist.");
         }
+
+        // Convertimos el DTO en un modelo de bill_loan
+        bill_loan billRecord = convertToModel(bill_loanDTO, user_rolOptional.get());
+
+        // Guardar en la base de datos
+        billLoanRepository.save(billRecord);
+        return new responseDTO(HttpStatus.OK, "Loan bill saved correctly.");
     }
 
     // Convertir de bill_loan a bill_loanDTO
@@ -65,9 +66,8 @@ public class bill_loanService {
 
     // Convertir de bill_loanDTO a bill_loan
     public bill_loan convertToModel(bill_loanDTO bill_loanDTO, user_rol userRol) {
-        // Aquí asignamos el user_rol completo al modelo
         return new bill_loan(
-            0,  // Este valor puede ser auto-generado si tu base de datos usa una estrategia para la clave primaria
+            0,  // ID generado automáticamente si la BD lo permite
             bill_loanDTO.get_state(),
             bill_loanDTO.get_code(),
             LocalDate.now(),
