@@ -16,85 +16,89 @@ public class user {
     */
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "id_usuario")
-   private int id_usuario;
+   @Column(name = "id_user")
+   private int id_user;
 
-   @Column(name = "nombre", length = 50, nullable = false)
-   private String nombre;
+   @Column(name = "name", length = 50, nullable = false)
+   private String name;
 
    @Column(name = "email", length = 150, nullable = false)
    private String email;
 
-   @Column(name = "contrasena", length = 150, nullable = false)
-   private String contrasena;
+   @Column(name = "password", length = 150, nullable = false)
+   private String password;
 
-   @Column(name = "telefono", length = 150, nullable = false)
-   private String telefono;
+   @Column(name = "number", length = 150, nullable = false)
+   private int number;
 
-   @Column(name = "fecha_registro", nullable = false)
-   private LocalDateTime fecha_registro;
+   @Column(name = "registration_date", nullable = false)
+   private LocalDateTime registration_date;
 
-   // constructor
-   public user(int id_usuario, String nombre, String email, String contrasena, String telefono,
-         LocalDateTime fecha_registro) {
-      this.id_usuario = id_usuario;
-      this.nombre = nombre;
-      this.email = email;
-      this.contrasena = contrasena;
-      this.telefono = telefono;
-      this.fecha_registro = fecha_registro;
+   @Column(name="status",nullable =false, columnDefinition = "boolean default true ")
+   private boolean status;
+
+   
+   
+   public user() {
    }
 
-   public user(){
-      
+   public user(int id_user, String name, String email, String password, int number,
+         LocalDateTime registration_date, boolean status) {
+      this.id_user = id_user;
+      this.name = name;
+      this.email = email;
+      this.password = password;
+      this.number = number;
+      this.registration_date = registration_date;
+      this.status = status;
    }
 
    // get del ID
-   public int getId_usuario() {
-      return id_usuario;
+   public int getId_user() {
+      return id_user;
    }
 
    // set del ID
-   public void setId_usuario(int id_usuario) {
-      this.id_usuario = id_usuario;
+   public void setId_user(int id_user) {
+      this.id_user = id_user;
    }
 
    // get del firstName
-   public String get_nombre() {
-      return nombre;
+   public String get_name() {
+      return name;
    }
 
    // set del firstName
-   public void set_breedName(String nombre) {
-      this.nombre = nombre;
+   public void set_breedName(String name) {
+      this.name = name;
    }
 
    // get del phone
-   public String get_contrasena() {
-      return contrasena;
+   public String get_password() {
+      return password;
    }
 
    // set del phone
-   public void set_contrasena(String contrasena) {
-      this.contrasena = contrasena;
+   public void set_password(String password) {
+      this.password = password;
    }
 
-   public String get_telefono() {
-      return telefono;
-   }
-
-   // set del phone
-   public void set_telefono(String telefono) {
-      this.telefono = telefono;
-   }
-
-   public LocalDateTime get_fecha_registro() {
-      return fecha_registro;
+   public int get_number() {
+      return number;
    }
 
    // set del phone
-   public void set_fecha_registro(LocalDateTime fecha_registro) {
-      this.fecha_registro = fecha_registro;
+   public void set_number(int number) {
+      this.number = number;
+   }
+
+   public LocalDateTime get_registration_date() {
+      return registration_date;
+   }
+
+   // set del phone
+   public void set_registration_date(LocalDateTime registration_date) {
+      this.registration_date = registration_date;
    }
 
    public String getEmail() {
@@ -105,4 +109,13 @@ public class user {
       this.email = email;
    }
 
+   public boolean getStatus() {
+      return status;
+   }
+
+   public void setStatus(boolean status) {
+      this.status = status;
+   }
+
+   
 }

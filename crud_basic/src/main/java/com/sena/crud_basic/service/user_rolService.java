@@ -1,6 +1,7 @@
 package com.sena.crud_basic.service;
 
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,8 @@ public class user_rolService {
    public Optional<user_rol> findById(int id) {
         return data.findById(id);
    }
+
+
 
     @Transactional
     public responseDTO delete(int id) {
@@ -61,7 +64,7 @@ public class user_rolService {
     public user_rolDTO convertToDTO(user_rol user_rol) {
         return new user_rolDTO(
             user_rol.get_id_user_rol(),
-            user_rol.getUser().getId_usuario(),
+            user_rol.getUser().getId_user(),
             user_rol.get_id_rol().getid_roles()
         );
     }

@@ -1,5 +1,7 @@
 package com.sena.crud_basic.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.genreDTO;
 import com.sena.crud_basic.DTO.responseDTO;
+import com.sena.crud_basic.model.genre;
 import com.sena.crud_basic.service.genreService;
 
 
@@ -51,4 +54,14 @@ public class genreController {
         var message= genreService.deletegenre(id); 
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+    @GetMapping("/Listgenre")
+    public ResponseEntity<List<genre>> getListgenre() {
+        return ResponseEntity.ok(genreService.getListgenre());
+    }
+    @GetMapping("/filter/{filter}")
+    public ResponseEntity<Object> getListgenreForName(@PathVariable String filter) {
+        var genreList = genreService.getListgenreForName(filter);
+        return new ResponseEntity<>(genreList, HttpStatus.OK);
+    }
+
 }

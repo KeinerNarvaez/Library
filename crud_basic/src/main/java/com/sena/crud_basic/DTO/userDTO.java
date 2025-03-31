@@ -1,52 +1,96 @@
 package com.sena.crud_basic.DTO;
-
+import java.time.LocalDateTime;
 public class userDTO {
 
-    private String nombre;
 
-    private String email;
+   private int id_user;
 
-    private String contrasena;
+   private String name;
 
-    private String telefono;
 
-    public userDTO(String nombre, String email, String contrasena, String telefono) {
-        this.nombre = nombre;
-        this.email = email;
-        this.contrasena = contrasena;
-        this.telefono = telefono;
-    }
+   private String email;
 
-    public String getNombre() {
-        return nombre;
-    }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+   private String password;
 
-    public String getEmail() {
-        return email;
-    }
+   private int number;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
-    public String getContrasena() {
-        return contrasena;
-    }
+   private LocalDateTime registration_date;
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
+   private boolean status;
+   public userDTO(int id_user, String name, String email, String password, int number,
+         LocalDateTime registration_date, boolean status) {
+      this.id_user = id_user;
+      this.name = name;
+      this.email = email;
+      this.password = password;
+      this.number = number;
+      this.registration_date = registration_date;
+      this.status = status;
+   }
 
-    public String getTelefono() {
-        return telefono;
-    }
+   // get del ID
+   public int getId_user() {
+      return id_user;
+   }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+   // set del ID
+   public void setId_user(int id_user) {
+      this.id_user = id_user;
+   }
 
+   // get del firstName
+   public String get_name() {
+      return name;
+   }
+
+   // set del firstName
+   public void set_breedName(String name) {
+      this.name = name;
+   }
+
+   // get del phone
+   public String get_password() {
+      return password;
+   }
+
+   // set del phone
+   public void set_password(String password) {
+      this.password = password;
+   }
+
+   public int get_number() {
+      return number;
+   }
+
+   // set del phone
+   public void set_number(int number) {
+      this.number = number;
+   }
+
+   public LocalDateTime get_registration_date() {
+      return registration_date;
+   }
+
+   // set del phone
+   public void set_registration_date(LocalDateTime registration_date) {
+      this.registration_date = registration_date;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public boolean getStatus() {
+      return status;
+   }
+
+   public void setStatus(boolean status) {
+      this.status = status;
+   }
 }

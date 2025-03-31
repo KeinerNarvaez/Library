@@ -33,6 +33,12 @@ public class book_genreController {
         responseDTO respuesta = book_genreService.save(book_genre);
         return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
+    @GetMapping("/")
+    public ResponseEntity<Object> getAllbook_genre() {
+        var lista = book_genreService.findAll();
+        // List<user> listaUsuariO2= userService.findAll();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOnebook_genre (@PathVariable int id) {
         var book_genre = book_genreService.findById(id);

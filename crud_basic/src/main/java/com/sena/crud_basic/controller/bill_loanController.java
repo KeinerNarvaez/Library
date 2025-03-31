@@ -33,7 +33,11 @@ public class bill_loanController {
         responseDTO respuesta = bill_loanService.save(bill_loan);
         return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
-
+    @GetMapping("/")
+    public ResponseEntity<Object> getAllbill_loan() {
+        var lista = bill_loanService.findAll();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneBill_loan(@PathVariable int id) {

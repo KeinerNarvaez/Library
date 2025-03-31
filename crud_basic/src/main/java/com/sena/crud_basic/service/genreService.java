@@ -13,6 +13,7 @@ import com.sena.crud_basic.DTO.responseDTO;
 
 import com.sena.crud_basic.model.genre;
 
+
 @Service
 public class genreService {
   @Autowired
@@ -24,6 +25,12 @@ public class genreService {
 
    public Optional<genre> findById(int id) {
       return data.findById(id);
+   }
+   public List<genre> getListgenre() {
+      return data.getListgenre();
+   }
+   public List<genre> getListgenreForName(String filter) {
+      return data.getListgenreForName(filter);
    }
    public responseDTO deletegenre(int id) {
       if (!findById(id).isPresent()) {

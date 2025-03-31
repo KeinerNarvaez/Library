@@ -35,6 +35,11 @@ public class editorialController {
         responseDTO respuesta = editorialService.save(editorial);
         return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
+    @GetMapping("/")
+    public ResponseEntity<Object> getAlleditorial() {
+        var lista = editorialService.findAll();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
         @GetMapping("/{id}")
     public ResponseEntity<Object> getOneeditorial(@PathVariable int id) {
         var editorial = editorialService.findById(id);

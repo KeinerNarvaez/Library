@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sena.crud_basic.DTO.authorDTO;
 import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.model.author;
+
 import com.sena.crud_basic.repository.Iauthor;
 
 @Service
@@ -23,6 +24,12 @@ public class authorService {
     public Optional<author> findById(int id) {
         return data.findById(id);
     }
+    public List<author> getListauthor() {
+      return data.getListauthor();
+   }
+   public List<author> getListauthorForName(String filter) {
+      return data.getListauthorForName(filter);
+   }
 
     public responseDTO deleteAuthor(int id) {
         if (!findById(id).isPresent()) {

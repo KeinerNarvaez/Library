@@ -1,5 +1,7 @@
 package com.sena.crud_basic.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.authorDTO;
 import com.sena.crud_basic.DTO.responseDTO;
+import com.sena.crud_basic.model.author;
 import com.sena.crud_basic.service.authorService;
 
 
@@ -50,5 +53,14 @@ public class authorController {
     public ResponseEntity<Object> deleteAuthor(@PathVariable int id) {
         var message= authorService.deleteAuthor(id); 
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+        @GetMapping("/Listauthor")
+    public ResponseEntity<List<author>> getListauthor() {
+        return ResponseEntity.ok(authorService.getListauthor());
+    }
+    @GetMapping("/filter/{filter}")
+    public ResponseEntity<Object> getListauthorForName(@PathVariable String filter) {
+        var authorList = authorService.getListauthorForName(filter);
+        return new ResponseEntity<>(authorList, HttpStatus.OK);
     }
 }

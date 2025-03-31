@@ -25,7 +25,12 @@ public class rolesService {
     public Optional<roles> findById(int id) {
         return data.findById(id);
     }
-
+   public List<roles> getListroles() {
+      return data.getListroles();
+   }
+   public List<roles> getListrolesForName(String filter) {
+      return data.getListrolesForName(filter);
+   }
     public responseDTO deleteroles(int id) {
         if (!findById(id).isPresent()) {
             responseDTO respuesta = new responseDTO(

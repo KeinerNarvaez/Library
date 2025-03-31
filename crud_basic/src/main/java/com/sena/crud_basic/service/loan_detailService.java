@@ -1,5 +1,6 @@
 package com.sena.crud_basic.service;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,9 @@ public class loan_detailService {
     public Optional<loan_detail> findById(int id) {
         return loanDetailRepository.findById(id);
     }
+        public List<loan_detail> findAll() {
+      return loanDetailRepository.findAll();
+   }
 
     public responseDTO delete(int id) {
         Optional<loan_detail> loanDetailOptional = findById(id);

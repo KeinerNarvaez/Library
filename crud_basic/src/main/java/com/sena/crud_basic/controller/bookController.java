@@ -34,11 +34,12 @@ public class bookController {
         return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
     @GetMapping("/")
-    public ResponseEntity<Object> getAllUser() {
+    public ResponseEntity<Object> getAllbook() {
         var lista = bookService.findAll();
         // List<user> listaUsuariO2= userService.findAll();
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
+
         @GetMapping("/{id}")
     public ResponseEntity<Object> getOnebook(@PathVariable int id) {
         var Book = bookService.findById(id);

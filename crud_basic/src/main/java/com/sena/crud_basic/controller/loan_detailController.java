@@ -31,6 +31,12 @@ public class loan_detailController {
         responseDTO respuesta = loan_detailService.save(loan_detail);
         return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
+    @GetMapping("/")
+    public ResponseEntity<Object> getAllloan_detail() {
+        var lista = loan_detailService.findAll();
+        // List<user> listaUsuariO2= userService.findAll();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneloan_detail(@PathVariable int id) {
         var loan_detail = loan_detailService.findById(id);

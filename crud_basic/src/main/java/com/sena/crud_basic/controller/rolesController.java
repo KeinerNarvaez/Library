@@ -1,5 +1,7 @@
 package com.sena.crud_basic.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.DTO.rolesDTO;
+
+import com.sena.crud_basic.model.roles;
 import com.sena.crud_basic.service.rolesService;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
@@ -43,5 +47,14 @@ public class rolesController {
     public ResponseEntity<Object> deleteroles(@PathVariable int id) {
         var message= rolesService.deleteroles(id); 
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+        @GetMapping("/Listroles")
+    public ResponseEntity<List<roles>> getListroles() {
+        return ResponseEntity.ok(rolesService.getListroles());
+    }
+    @GetMapping("/filter/{filter}")
+    public ResponseEntity<Object> getListrolesForName(@PathVariable String filter) {
+        var rolesList = rolesService.getListrolesForName(filter);
+        return new ResponseEntity<>(rolesList, HttpStatus.OK);
     }
 }

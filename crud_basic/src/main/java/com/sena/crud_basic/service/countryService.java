@@ -26,7 +26,12 @@ public class countryService {
    public Optional<country> findById(int id) {
       return data.findById(id);
    }
-
+   public List<country> getListcountry() {
+      return data.getListcountry();
+   }
+   public List<country> getListcountryForName(String filter) {
+      return data.getListcountryForName(filter);
+   }
    public responseDTO deletecountry(int id) {
       if (!findById(id).isPresent()) {
          responseDTO respuesta = new responseDTO(
