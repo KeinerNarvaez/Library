@@ -101,6 +101,7 @@ public class bookService {
         return new bookDTO(
             book.get_id_book(),
             book.get_name_book(),
+            book.get_image(),
             book.get_id_country().get_id_country(),
             book.get_id_editorial().get_id_editorial(),
             book.get_id_author_book().get_id_author()
@@ -111,6 +112,7 @@ public class bookService {
         return new book(
             0,  
             bookDTO.get_name_book(),
+            bookDTO.get_image(),
             country,
             editorial,
             author

@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 @Entity(name="book")
 public class book {
@@ -15,6 +16,9 @@ public class book {
     
     @Column(name="name_book", length = 20, nullable = false)
     private String name_book;
+    @Lob
+    @Column(name="image", nullable = false)
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "id_country")
@@ -29,9 +33,10 @@ public class book {
     private author id_author_book;
 
 
-    public book(int id_book, String name_book, country id_country, editorial id_editorial, author id_author_book){
+    public book(int id_book, String name_book,String image, country id_country, editorial id_editorial, author id_author_book) {
         this.id_book=id_book;
         this.name_book=name_book;
+        this.image=image;
         this.id_country=id_country;
         this.id_editorial=id_editorial;
         this.id_author_book=id_author_book;
@@ -49,6 +54,12 @@ public class book {
     }
     public String get_name_book(){
         return name_book;
+    }
+    public void set_image(String image) {
+        this.image = image;
+    }
+    public String get_image(){
+        return image;
     }
     public void set_id_country(country id_country) {
         this.id_country = id_country;
