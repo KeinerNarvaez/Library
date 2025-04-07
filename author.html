@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>TV</title>
+      <title>Autores</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -36,7 +36,7 @@
 <!-- header section start -->
 <div class="header_section">
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="logo" href="index.html"><img src="images/b650f9cb-a484-424a-984d-117c6dd42023.webp" style="width: 30%;"></a>
+      <a class="logo" href="index.html"><img src="images/b650f9cb-a484-424a-984d-117c6dd42023.webp" style="width: 30%; min-width: 70px;"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
@@ -53,7 +53,6 @@
             </li>
          </ul>
          <div class="search_icon"><a href="login.html"><img src="images/user-icon.png"><span class="padding_left_15">Iniciar Sesión</span></a></div>
-         <div class="search_icon"><span class="padding_left_15"><input type="search" placeholder="Search..." style="border-radius: 30px;padding-left: 30px;"><img src="images/search-icon.png" style="margin-left: 2px;"></span></div>
       </div>
    </nav>
 </div>
@@ -65,7 +64,7 @@
             <div class="col-md-8">
                <div class="search-box" style="display: flex; align-items: center;">
                   <input type="text" id="nameFilter" placeholder="Busca autores..." class="form-control" style="border-radius: 30px 0 0 30px; height: 45px;">
-                  <button class="search-btn" id="search-btn" style="border-radius: 0 30px 30px 0; height: 45px; margin-left: -1px;">
+                  <button class="search-btn" id="search-btn" onclick="getAuthor();" style="border-radius: 0 30px 30px 0; height: 45px; margin-left: -1px;">
                      <i class='bx bx-search'></i>
                   </button>
                </div>
@@ -340,14 +339,7 @@
                   <li><a href="author.html">Autores</a></li>
                </ul>
             </div>
-            <div class="social_icon">
-               <ul>
-                  <li><a href="#"><img src="images/fb-icon.png"></a></li>
-                  <li><a href="#"><img src="images/twitter-icon.png"></a></li>
-                  <li><a href="#"><img src="images/linkedin-icon.png"></a></li>
-                  <li><a href="#"><img src="images/instagram-icon.png"></a></li>
-               </ul>
-            </div>
+
          </div>
       </div>
       <!-- footer  section end -->

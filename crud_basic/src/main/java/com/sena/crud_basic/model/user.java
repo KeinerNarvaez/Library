@@ -29,7 +29,7 @@ public class user {
    private String password;
 
    @Column(name = "number", length = 150, nullable = false)
-   private int number;
+   private String number;
 
    @Column(name = "registration_date", nullable = false)
    private LocalDateTime registration_date;
@@ -42,7 +42,7 @@ public class user {
    public user() {
    }
 
-   public user(int id_user, String name, String email, String password, int number,
+   public user(int id_user, String name, String email, String password, String number,
          LocalDateTime registration_date, boolean status) {
       this.id_user = id_user;
       this.name = name;
@@ -83,12 +83,12 @@ public class user {
       this.password = password;
    }
 
-   public int get_number() {
+   public String get_number() {
       return number;
    }
 
    // set del phone
-   public void set_number(int number) {
+   public void set_number(String number) {
       this.number = number;
    }
 

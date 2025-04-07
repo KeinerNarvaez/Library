@@ -677,7 +677,10 @@ function openModifiqueBookModal() {
 
 async function getBookGenreData() {
     var url = "http://localhost:8085/api/v1/book/";
-
+    document.getElementById("buttonrevert").style.display="none"
+    document.getElementById("cards").style.display="block"
+    document.getElementById("buttonModify").style.display="block"
+    document.getElementById("filterCards").style.display="block"
     const filtro = document.getElementById("filterCards").value;
     if (filtro) {
         url += "filter/" + filtro;
@@ -789,7 +792,10 @@ async function getBookGenreModify() {
         "User-Agent": "web",
         "Content-Type": "application/json"
     };
-
+    document.getElementById("buttonModify").style.display="none"
+    document.getElementById("filterCards").style.display="none"
+    document.getElementById("cards").style.display="none"
+    document.getElementById("buttonrevert").style.display="block"
     let response = await fetch(url, {
         method: "GET",
         headers: headersList

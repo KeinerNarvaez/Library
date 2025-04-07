@@ -1043,3 +1043,22 @@ input.email_text::placeholder {
   font-size: 14px;
   transition: border-color 0.3s;
 }
+.alerta-error,
+.alerta-exito {
+    display: none;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.alerta-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alerta-exito {
+    background-color: #d4edda;
+    color: #155724;
+}

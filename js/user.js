@@ -24,6 +24,7 @@ async function registerUser() {
         if (!password) document.getElementById("userPassword").style.borderColor = "red";
         if (!number) document.getElementById("userNumber").style.borderColor = "red";
         return;
+        
     }
 
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
@@ -69,10 +70,47 @@ async function registerUser() {
         console.log(data);
         console.log('funciona');
         alert("Registro exitoso!");
-        
+        containerFormRegister.classList.add("hide");
+        containerFormLogin.classList.remove("hide")
     } catch (error) {
         console.error("Error al registrar:", error);
         alert("Ocurrió un error al registrar. Por favor, intente nuevamente.");
+
     }
 }
 
+async function RegisterLogin(email, password) {
+    try {
+        let response = await fetch(`http://localhost:8085/api/v1/user/filter/${email}/${password}`, {
+            method: "GET",
+            headers: {
+                "Accept": "*/*"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Error en login");
+        }
+
+        let data = await response.json();
+        console.log(data);
+
+        if (data.length ===0) {
+            alert("Credenciales incorrectas.");
+        } else {
+            alert("¡Inicio de sesión exitoso!");
+            // Aquí podrías guardar al usuario o redireccionar
+        }
+
+    } catch (error) {
+        console.error("Error en login:", error);
+        alert("No se pudo iniciar sesión. Intenta nuevamente.");
+    }
+}
+
+document.getElementById("sign-login").addEventListener("click", async function () {
+    let email = document.getElementById("userEmailLogin").value;
+    let password = document.getElementById("userPasswordLogin").value;
+    await RegisterLogin(email, password);
+    window.location.href = "index.html";
+});

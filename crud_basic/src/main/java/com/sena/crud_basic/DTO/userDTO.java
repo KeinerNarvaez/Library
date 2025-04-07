@@ -13,13 +13,13 @@ public class userDTO {
 
    private String password;
 
-   private int number;
+   private String number;
 
 
    private LocalDateTime registration_date;
 
    private boolean status;
-   public userDTO(int id_user, String name, String email, String password, int number,
+   public userDTO(int id_user, String name, String email, String password, String number,
          LocalDateTime registration_date, boolean status) {
       this.id_user = id_user;
       this.name = name;
@@ -60,12 +60,12 @@ public class userDTO {
       this.password = password;
    }
 
-   public int get_number() {
+   public String get_number() {
       return number;
    }
 
    // set del phone
-   public void set_number(int number) {
+   public void set_number(String number) {
       this.number = number;
    }
 

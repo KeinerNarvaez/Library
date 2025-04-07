@@ -12,8 +12,8 @@ public interface Iuser extends JpaRepository
     @Query("SELECT u FROM user u WHERE u.status != false")
     List<user> getListUserActive();
 
-    @Query("SELECT u FROM user u WHERE u.name LIKE %?1%")
-    List<user> getListUserForName(String filter);
+    @Query("SELECT u FROM user u WHERE u.email = ?1 AND u.password = ?2")
+    List<user> getListUserForName(String email, String password);
     
 
 

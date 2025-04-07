@@ -56,16 +56,19 @@ public class userController {
         return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
 
-    @GetMapping("/filter/{filter}")
-    public ResponseEntity<Object> getListUserForName(@PathVariable String filter) {
-        var userList = userService.getListUserForName(filter);
+    @GetMapping("/filter/{email}/{password}")
+    public ResponseEntity<Object> getListUserForName(@PathVariable String email, @PathVariable String password) {
+        var userList = userService.getListUserForName(email, password);
+        if (userList.isEmpty()) {
+            return new ResponseEntity<>("Credenciales incorrectas", HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
+    
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable int id) {
         var message = userService.deleteUser(id);
-
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
