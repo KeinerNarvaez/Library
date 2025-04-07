@@ -14,8 +14,7 @@
 - [⚙️ Tecnologías utilizadas](#️-tecnologías-utilizadas)
 - [🧪 Funcionalidades principales](#-funcionalidades-principales)
 - [🚀 Instalación y ejecución](#-instalación-y-ejecución)
-- [🗄️ Modelo de Base de Datos](#- Modelo de Base de Datos)
-- [🧠 Autor](#-autor)
+- [🗄️ Modelo de Base de Datos](#-Modelo-de-Base-de-Datos)
 
 ---
 
