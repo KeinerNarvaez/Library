@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,10 +38,12 @@ public class authorController {
         responseDTO respuesta = authorService.save(author);
         return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
-        /*
-     * Se requiere un dato, el ID
-     * PathVariable=captura de información por la URL
-     */
+    @GetMapping("/")
+    public ResponseEntity<Object> getAllauthor() {
+        var lista = authorService.findAll();
+        // List<user> listaUsuariO2= userService.findAll();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneauthor(@PathVariable int id) {
         var author = authorService.findById(id);
@@ -62,5 +65,13 @@ public class authorController {
     public ResponseEntity<Object> getListauthorForName(@PathVariable String filter) {
         var authorList = authorService.getListauthorForName(filter);
         return new ResponseEntity<>(authorList, HttpStatus.OK);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<responseDTO> updateAuthor(
+            @PathVariable int id,
+            @RequestBody authorDTO authorDTO) {
+        
+        responseDTO respuesta = authorService.update(id, authorDTO);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
 }

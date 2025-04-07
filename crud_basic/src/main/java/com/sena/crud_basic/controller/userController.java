@@ -41,7 +41,6 @@ public class userController {
     @GetMapping("/")
     public ResponseEntity<Object> getAllUser() {
         var listaUsuario = userService.findAll();
-        // List<user> listaUsuariO2= userService.findAll();
         return new ResponseEntity<>(listaUsuario, HttpStatus.OK);
     }
 

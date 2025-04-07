@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,7 +37,7 @@ public class bookController {
     @GetMapping("/")
     public ResponseEntity<Object> getAllbook() {
         var lista = bookService.findAll();
-        // List<user> listaUsuariO2= userService.findAll();
+        // List<book> listaUsuariO2= bookService.findAll();
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
@@ -53,5 +54,23 @@ public class bookController {
         var message= bookService.delete(id);
         
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+    @GetMapping("/filter/{filter}")
+    public ResponseEntity<Object> getListBookForName(@PathVariable String filter) {
+        var List = bookService.getListBookForName(filter);
+        return new ResponseEntity<>(List, HttpStatus.OK);
+    }
+    @GetMapping("/Stars/{filter}")
+    public ResponseEntity<Object> getListBookForStars(@PathVariable int filter) {
+        var List = bookService.getListBookForStars(filter);
+        return new ResponseEntity<>(List, HttpStatus.OK);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<responseDTO> updatebook(
+            @PathVariable int id,
+            @RequestBody bookDTO bookDTO) {
+        
+        responseDTO respuesta = bookService.update(id, bookDTO);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
 }

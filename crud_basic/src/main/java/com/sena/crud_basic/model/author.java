@@ -28,14 +28,26 @@ public class author {
     @Lob
     @Column(name="biography", length = 500, nullable = false)
     private String biography;
-   // constructor
+    @Lob
+    @Column(name="image", nullable = false)
+    private String image;
+
+    @Column(name = "stars",length = 3, nullable = false)
+    private String stars;
+
+    @Column(name = "number_of_titles", nullable = false)
+    private String number_of_titles;
+
     public author() {
 
     }
-    public author(int author, String author_name, String biography){
+    public author(int author, String author_name, String biography, String image, String stars,String number_of_titles) {
         this.id_author=author;
         this.author_name=author_name;
         this.biography=biography;
+        this.image=image;
+        this.stars=stars;
+        this.number_of_titles=number_of_titles;
     }
     public void set_id_author(int id_author) {
         this.id_author = id_author;
@@ -54,6 +66,24 @@ public class author {
     }
     public String get_biography(){
         return biography;
+    }
+    public void set_image(String image) {
+        this.image = image;
+    }
+    public String get_image(){
+        return image;
+    }
+    public void set_stars(String stars) {
+        this.stars = stars;
+    }
+    public String get_stars(){
+        return stars;
+    }
+    public void set_number_of_titles(String number_of_titles) {
+        this.number_of_titles = number_of_titles;
+    }
+    public String get_number_of_titles(){
+        return number_of_titles;
     }
 
 }

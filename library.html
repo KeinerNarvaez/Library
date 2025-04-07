@@ -15,6 +15,7 @@
       <meta name="author" content="">
       <!-- bootstrap css -->
       <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
       <!-- style css -->
       <link rel="stylesheet" type="text/css" href="css/style.css">
       <!-- Responsive-->
@@ -59,22 +60,202 @@
 <!-- header section end -->
       <!-- movies section start -->
       <div class="movies_section layout_padding">
+         <div class="row">
+            <div class="col-md-4 text-right">
+               <button class="add-btn" onclick="openAddBookModal()" style="height: 45px; border-radius: 30px; margin-left: auto;">
+                  <i class='bx bx-plus'></i> Agregar libro
+               </button>
+            </div>
+            <div class="col-md-5 text-right"style="margin-top: 10px;">
+               <button class="add-btn" onclick="openAddBookModalGenre()" style="height: 45px; border-radius: 30px; margin-left: auto;">
+                  <i class='bx bx-plus'></i>Agregar  genero a libro
+               </button>
+            </div>
+         </div>
+         
          <div class="container">
+            <div style="display: flex;flex-wrap: wrap;">
+               <div class="search-box" align="center">
+                  <input type="text" id="nameFilter"  placeholder="Busca por nombre...">
+                  <button  class="search-btn" id="search-btn">
+                    <i class='bx bx-search'></i>
+                  </button>
+                </div>
+                <div class="search-box" align="center">
+                  <input type="text" id="starFilter"  placeholder="Busca por numero de estrellas...">
+                  <button  class="search-btn" id="search-btn-stars">
+                    <i class='bx bx-search'></i>
+                  </button>
+                </div>
+            </div>
+
             <div class="movies_menu">
                <ul>
-                  <li class="active" id="narrativo"><a href="#">Narrativa</a></li>
+                  <li  id="narrativo"><a href="#">Narrativa</a></li>
                   <li id="poesia"><a href="#">Poesía</a></li>
                   <li id="comics"><a href="#" >Cómics</a></li>
                   <li id="manga"><a href="#">Manga</a></li>
-                  <li id="mitologia"><a href="#">Mitologia</a></li>
-                  <li id="romantico"><a href="#">Romantico</a></li>
+                  <li id="mitologia"><a href="#">Mitología</a></li>
+                  <li id="romantico"><a href="#">Romántico</a></li>
                   <li id="erotico"><a href="#">Infantil</a></li>
                </ul>
             </div>
-            <div id="cargar-tarjetas"></div>
+            <div id="cargar-tarjetas">
+               <div class="movies_section_2 layout_padding" >
+               <div class="movies_main">
+                  <div  onload="getBook();" id="pao">
+                     <h1 style="text-align: center;color:white; padding-top: 20px;">Seleccione una categoría</h1><br>
+                     <div class="movies_menu">
+                     <div align="center">
+                     <img src="https://static.vecteezy.com/system/resources/previews/023/221/041/non_2x/open-book-school-supply-icon-free-png.png" class="image" style="width:80%; height:auto;">
+                     </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
          </div>
       </div>
       <!-- movies section end -->
+
+      <div id="addBookModal" class="modal" style="display:none;">
+         <div class="modal-content">
+           <span class="close" onclick="document.getElementById('addBookModal').style.display='none'">&times;</span>
+           <h2>Agregar nuevo libro</h2>
+           <form id="bookForm">
+             <h3>Nombre</h3>
+             <input type="text" id="bookName" placeholder="Nombre del libro" required>
+       
+             <h3>Imagen</h3>
+             <input type="text" id="bookImage" placeholder="URL de la imagen">
+       
+             <h3>Estrellas</h3>
+             <div class="select-container">
+               <select id="selectStars">
+                 <option value="">-- Selecciona una opción --</option>
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5">5</option>
+               </select>
+             </div>
+       
+             <h3>Autor</h3>
+             <div class="select-container">
+               <select id="selectAuthor">
+                 <option value="">-- Selecciona una opción --</option>
+               </select>
+             </div>
+       
+             <h3>País</h3>
+             <div class="select-container">
+               <select id="selectCountry">
+                 <option value="">-- Selecciona una opción --</option>
+               </select>
+             </div>
+       
+             <h3>Editorial</h3> 
+             <div class="select-container">
+               <select id="selectEditorial">
+                 <option value="">-- Selecciona una opción --</option>
+               </select>
+             </div>
+       
+             <button type="button" id="botton" onclick="registerBook()" class="guardar">Guardar</button>
+           </form>
+         </div>
+       </div>
+       
+<div id="modifiqueBookModal" class="modal" style="display:none;">
+<div class="modal-content">
+ <span class="close" onclick="document.getElementById('modifiqueBookModal').style.display='none'">&times;</span>
+ <h2>Editar libro</h2>
+ <form id="modifyBookForm">
+   <input type="hidden" id="bookIdModifique">
+   <h3>Nombre</h3>
+   <input type="text" id="bookNameModifique" placeholder="Nombre del libro" required>
+
+   <h3>Imagen</h3>
+   <img src="" width="100%" height="300px" id="imageModifique">
+   <input type="text" id="bookImageModifique" placeholder="URL de la imagen">
+
+   <h3>Estrellas</h3>
+   <div class="select-container">
+     <select id="selectStarsModifique">
+       <option value="">-- Selecciona una opción --</option>
+       <option value="1">1</option>
+       <option value="2">2</option>
+       <option value="3">3</option>
+       <option value="4">4</option>
+       <option value="5">5</option>
+     </select>
+   </div>
+
+   <h3>Autor</h3>
+   <div class="select-container">
+     <select id="selectAuthorModifique">
+       <option value="">-- Selecciona una opción --</option>
+     </select>
+   </div>
+
+   <h3>País</h3>
+   <div class="select-container">
+     <select id="selectCountryModifique">
+       <option value="">-- Selecciona una opción --</option>
+     </select>
+   </div>
+
+   <h3>Editorial</h3>
+   <div class="select-container">
+     <select id="selectEditorialModifique">
+       <option value="">-- Selecciona una opción --</option>
+     </select>
+   </div>
+
+   <button type="button" id="edit" onclick="updateBook(document.getElementById('bookIdModifique').value)" class="guardar">Editar</button>
+   <button type="button" id="dele" onclick="deleteBook(document.getElementById('bookIdModifique').value)" class="guardar">Eliminar</button>
+ </form>
+</div>
+</div>
+<div id="addBookModalGenre" class="modal" style="display:none;">
+   <div class="modal-content">
+    <span class="close" onclick="document.getElementById('addBookModalGenre').style.display='none'">&times;</span>
+    <h2>Editar género del libro.</h2>
+    <form id="modifyBookForm">
+      <h3>Registros</h3>
+      <button type="button" class="search-btn" style="width: 100%;"onclick="getBookGenreModify()" id="buttonModify">
+         Modificar
+      </button>
+      <div class="search" align="center">
+         <input type="text" id="filterCards" placeholder="Busca por nombre">
+         <button type="button" class="search-btn" style="width: 100%;" id="cards" onclick="getBookGenreData()">
+            <i class='bx bx-search'></i>
+         </button>
+      </div>
+       <div id="contenedorFrom">
+         <div class="select-container" style="">
+            <div class="">
+              <h3 class="">El bosque magico</h3>
+              <input type="hidden" id="bookIdModifiqueGenre">
+              <div align="center">
+               <img src="https://marketplace.canva.com/EAF55Kx4v24/1/0/1003w/canva-portada-libro-fantas%C3%ADa-ilustrativo-verde-_pp1hAU8znQ.jpg" width="70%" height="100px" id="imageModifique">
+              </div>
+              <h5 class="" style="margin-top: 20px;">Genero</h5>
+              <select id="selectGenreModifique">
+               <option value="">-- Selecciona una opción --</option>
+             </select>
+             <input type="hidden" id="selectBookModifique">
+            </div>
+            <div style="margin-top: 20px;">
+               <button type="button" id="edit" onclick="updateBook(document.getElementById('bookIdModifique').value)" class="guardar">Actualizar</button>
+               <button type="button" id="dele" onclick="deleteBook(document.getElementById('bookIdModifique').value)" class="guardar">Agregar</button>
+            </div>
+          </div>
+       </div>
+    </form>
+   </div>
+</div>
 <!-- footer  section start -->
 <div class="footer_section layout_padding">
    <div class="container">
@@ -121,5 +302,6 @@
    });
 </script>
 <script src="js/index.js"></script>
+<script src="js/book.js"></script>
    </body>
 </html>

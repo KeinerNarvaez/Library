@@ -573,13 +573,14 @@ button {
     flex-wrap: wrap;
 }
 .iamge_movies_main {
-    width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
+
 .iamge_movies {
-    width: 100%;
-    float: left;
-    margin: 0px 13px;
+    width: calc(25% - 10px); /* Para que haya 4 por fila */
+    margin-bottom: 20px;
 }
 
 .image_3 {
@@ -870,4 +871,175 @@ input.email_text::placeholder {
 
 .copyright_text a:hover {
     color: #d89616;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 30px;
+    padding: 5px 15px;
+    width: 300px;
+    margin: 20px auto; /* Esto lo centrará horizontalmente */
+    /* Resto de tus estilos... */
+  }
+
+  
+  .search-box input {
+    border: none;
+    background: transparent;
+    padding: 10px;
+    outline: none;
+    flex: 1;
+  }
+  
+  .search-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #555;
+    font-size: 1.2rem;
+    padding: 5px;
+  }
+  
+  .search-btn:hover {
+    color: #000;
+  }
+  
+  .bx-search {
+    font-size: 1.3rem;
+    vertical-align: middle;
+  }
+  .add-btn {
+    background:  #d0ba2c;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    height: 45px;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-left: 15px;
+}
+
+.add-btn:hover {
+    background: #c9d131;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.add-btn i {
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    .search-box {
+        margin-bottom: 15px;
+    }
+    
+    .text-right {
+        text-align: left !important;
+    }
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0%;
+    top: 0%;
+    bottom:50%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    overflow-y:scroll;
+    scrollbar-width: none;
+    overflow-x: hidden;
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+  }
+  .modal input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: 100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .modal button {
+    background-color: #d0ba2c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .modal button:hover {
+    background-color: #c9d131;
+  }
+  .modal button:focus {
+    outline: none;
+  }
+.select-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: 10px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.select-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.select-container select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.select-container select:focus {
+  border-color: #007BFF;
+  outline: none;
+  background-color: #fff;
+}
+.select-container input[type="select"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  font-size: 14px;
+  transition: border-color 0.3s;
 }

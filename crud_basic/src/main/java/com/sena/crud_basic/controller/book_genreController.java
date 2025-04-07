@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -51,5 +52,12 @@ public class book_genreController {
     public ResponseEntity<Object> delete(@PathVariable int id) {
         var message= book_genreService.delete(id); 
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<responseDTO> updatebook_genre(
+        @PathVariable int id,
+        @RequestBody book_genreDTO book_genreDTO) {
+        responseDTO respuesta = book_genreService.update(id, book_genreDTO);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
 }

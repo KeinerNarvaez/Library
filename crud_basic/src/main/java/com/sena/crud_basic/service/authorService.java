@@ -65,12 +65,37 @@ public class authorService {
         return respuesta;
 
     }
-
+    public responseDTO update(int id, authorDTO authorDTO) {
+        Optional<author> existingAuthorOpt = findById(id);
+        
+        if (!existingAuthorOpt.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "El autor no existe");
+        }
+    
+        // Validaciones
+        if (authorDTO.get_author_name().length() < 1 || authorDTO.get_author_name().length() > 50) {
+            return new responseDTO(HttpStatus.BAD_REQUEST, "El nombre debe tener entre 1 y 50 caracteres");
+        }
+    
+        author existingAuthor = existingAuthorOpt.get();
+        existingAuthor.set_author_name(authorDTO.get_author_name());
+        existingAuthor.set_biography(authorDTO.get_biography());
+        existingAuthor.set_image(authorDTO.get_image());
+        existingAuthor.set_stars(authorDTO.get_stars());
+        existingAuthor.set_number_of_titles(authorDTO.get_number_of_titles());
+    
+        data.save(existingAuthor);
+    
+        return new responseDTO(HttpStatus.OK, "Autor actualizado correctamente");
+    }
     public authorDTO convertToDTO(author author) {
         authorDTO authorDTO = new authorDTO(
                 author.get_id_author(),
                 author.get_author_name(),
-                author.get_biography());
+                author.get_biography(),
+                author.get_image(),
+                author.get_stars(),
+                author.get_number_of_titles());
         return authorDTO;
     }
 
@@ -78,7 +103,10 @@ public class authorService {
         author author = new author(
                 0,
                 authorDTO.get_author_name(),
-                authorDTO.get_biography());
+                authorDTO.get_biography(),
+                authorDTO.get_image(),
+                authorDTO.get_stars(),
+                authorDTO.get_number_of_titles());
         return author;
     }
 

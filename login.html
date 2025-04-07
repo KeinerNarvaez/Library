@@ -75,23 +75,30 @@
                     <div>
                         <label>
                             <i class='bx bx-user' ></i>
-                            <input type="text" placeholder="Nombre Usuario" name="userName" >
+                            <input type="text" placeholder="Nombre Usuario" name="userName" min="5" max="50" required id="userName" >
                         </label>
                     </div>
                     <div>
                         <label >
                             <i class='bx bx-envelope' ></i>
-                            <input type="email" placeholder="Correo Electronico" name="userEmail" >
+                            <input type="email" placeholder="Correo Electronico" min="20" max="150" name="userEmail" required id="userEmail" >
                         </label>
                     </div>
                    <div>
                         <label>
                             <i class='bx bx-lock-alt' ></i>
-                            <input type="password" placeholder="Contraseña" name="userPassword">
+                            <input type="password" placeholder="Contraseña" name="userPassword" min="5" max="150" required id="userPassword">
                         </label>
                    </div>
+                   <div>
+                    <label>
+                        <i class='bx bx-phone'></i>
+                        <input type="text" placeholder="Numero Telefonico" min="1" max="10" name="userNumber" required id="userNumber">
+                    </label>
+               </div>
                    
-                    <input type="submit" value="Registrarse">
+                    <input type="button" value="Registrarse" id="sign-register">
+
                     <div class="alerta-error">Todos los campos son obligatorios</div>
                     <div class="alerta-exito">Te registraste correctamente</div>
                 </form>
@@ -121,16 +128,16 @@
                     <div>
                         <label >
                             <i class='bx bx-envelope' ></i>
-                            <input type="email" placeholder="Correo Electronico" name="userPassword">
+                            <input type="email" placeholder="Correo Electronico" name="userPassword" id="userEmailLogin">
                         </label>
                     </div>
                     <div>
                         <label>
                             <i class='bx bx-lock-alt' ></i>
-                            <input type="password" placeholder="Contraseña" name="userPassword">
+                            <input type="password" placeholder="Contraseña" name="userPassword" id="userPasswordLogin">
                         </label>
                     </div>
-                    <input type="submit" value="Iniciar Sesión">
+                    <input type="button" value="Iniciar Sesión" id="sign-login">
                     <div class="alerta-error">Todos los campos son obligatorios</div>
                     <div class="alerta-exito">Te registraste correctamente</div>
                 </form>
@@ -142,6 +149,6 @@
     </footer>
     <script src="js/script.js"></script>
     <script src="js/register.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/user.js"></script>
 </body>
 </html>

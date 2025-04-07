@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+
 import com.sena.crud_basic.DTO.bookDTO;
 import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.model.book;
@@ -38,6 +39,12 @@ public class bookService {
     public Optional<book> findById(int id) {
         return bookRepository.findById(id);
     }
+    public List<book> getListBookForName(String filter) {
+        return bookRepository.getListBookForName(filter);
+     }
+    public List<book> getListBookForStars(int filter) {
+        return bookRepository.getListBookForStars(filter);
+    }
 
     public responseDTO delete(int id) {
         Optional<book> bookOptional = findById(id);
@@ -53,7 +60,51 @@ public class bookService {
             "It was deleted correctly"
         );
     }
-
+    public responseDTO update(int id, bookDTO bookDTO) {
+        Optional<book> existingbookOpt = findById(id);
+    
+        if (!existingbookOpt.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "El libro no existe");
+        }
+    
+        if (bookDTO.get_name_book() == null || bookDTO.get_name_book().trim().isEmpty() ||
+            bookDTO.get_name_book().length() > 50) {
+            return new responseDTO(HttpStatus.BAD_REQUEST, "El nombre debe tener entre 1 y 50 caracteres");
+        }
+    
+        // Validar relaciones
+        Optional<country> countryOptional = countryService.findById(bookDTO.get_id_country());
+        if (!countryOptional.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "El país no existe");
+        }
+    
+        Optional<editorial> editorialOptional = editorialService.findById(bookDTO.get_id_editorial());
+        if (!editorialOptional.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "La editorial no existe");
+        }
+    
+        Optional<author> authorOptional = authorService.findById(bookDTO.get_id_author_book());
+        if (!authorOptional.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "El autor no existe");
+        }
+    
+        try {
+            book existingbook = existingbookOpt.get();
+            existingbook.set_name_book(bookDTO.get_name_book());
+            existingbook.set_image(bookDTO.get_image());
+            existingbook.set_stars(bookDTO.get_stars());
+            existingbook.set_id_country(countryOptional.get());
+            existingbook.set_id_editorial(editorialOptional.get());
+            existingbook.set_id_author_book(authorOptional.get());
+    
+            bookRepository.save(existingbook);
+    
+            return new responseDTO(HttpStatus.OK, "Libro actualizado correctamente");
+        } catch (Exception e) {
+            return new responseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar: " + e.getMessage());
+        }
+    }
+    
     public responseDTO save(bookDTO bookDTO) {  
         if (bookDTO.get_name_book().length() < 1 ||
         bookDTO.get_name_book().length() > 20) {
@@ -104,7 +155,8 @@ public class bookService {
             book.get_image(),
             book.get_id_country().get_id_country(),
             book.get_id_editorial().get_id_editorial(),
-            book.get_id_author_book().get_id_author()
+            book.get_id_author_book().get_id_author(),
+            book.get_stars()
         );
     }
 
@@ -115,7 +167,8 @@ public class bookService {
             bookDTO.get_image(),
             country,
             editorial,
-            author
+            author,
+            bookDTO.get_stars()
         );
     }
 }

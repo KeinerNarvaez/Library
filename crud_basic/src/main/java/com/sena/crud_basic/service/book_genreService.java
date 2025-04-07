@@ -5,11 +5,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 import com.sena.crud_basic.DTO.book_genreDTO;
 import com.sena.crud_basic.DTO.responseDTO;
 
 import com.sena.crud_basic.model.book;
 import com.sena.crud_basic.model.book_genre;
+
 import com.sena.crud_basic.model.genre;
 import com.sena.crud_basic.repository.Ibook_genre;
 
@@ -43,6 +45,34 @@ public class book_genreService {
             HttpStatus.OK,
             "It was deleted correctly"
         );
+    }
+        public responseDTO update(int id, book_genreDTO book_genreDTO) {
+        Optional<book_genre> existingbookOpt = findById(id);
+    
+        if (!existingbookOpt.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "El registro no existe");
+        }
+        // Validar relaciones
+        Optional<genre> genreOptional = genreService.findById(book_genreDTO.get_id_genre());
+        if (!genreOptional.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "El genero no existe");
+        }
+    
+        Optional<book> bookOptional = bookService.findById(book_genreDTO.get_id_book());
+        if (!bookOptional.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "La editorial no existe");
+        }
+        try {
+            book_genre existingbook = existingbookOpt.get();
+            existingbook.set_genre(genreOptional.get());
+            existingbook.set_id_book(bookOptional.get());
+    
+            book_genreRepository.save(existingbook);
+    
+            return new responseDTO(HttpStatus.OK, "Libro actualizado correctamente");
+        } catch (Exception e) {
+            return new responseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar: " + e.getMessage());
+        }
     }
     public responseDTO save(book_genreDTO book_genreDTO) {
       // Validar existencia del género
@@ -87,8 +117,8 @@ public class book_genreService {
   public book_genre convertToModel(book_genreDTO book_genreDTO, book book, genre genre) {
    return new book_genre(
        0,
-       genre,
-       book
+    genre,
+    book
    );
 }
 

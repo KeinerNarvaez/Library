@@ -141,7 +141,7 @@ body {
   color: #a7a7a7;
 }
 
-.form input[type="submit"] {
+.form input[type="button"] {
   background-color: #bd9191;
   color: #fff;
   border-radius: 20px;
@@ -152,7 +152,7 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
-.form input[type="submit"]:hover {
+.form input[type="button"]:hover {
   background-color: #9a7a7a;
 }
 

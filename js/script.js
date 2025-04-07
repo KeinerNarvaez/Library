@@ -12,4 +12,4 @@ btnSignIn.addEventListener("click", e => {
 btnSignUp.addEventListener("click", e => {
     containerFormLogin.classList.add("hide");
     containerFormRegister.classList.remove("hide")
-})
+})      

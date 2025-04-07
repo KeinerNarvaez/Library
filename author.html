@@ -25,6 +25,7 @@
       <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
       <!-- owl stylesheets --> 
       <link rel="stylesheet" href="css/owl.carousel.min.css">
       <link rel="stylesheet" href="css/owl.theme.default.min.css">
@@ -58,8 +59,67 @@
 </div>
 <!-- header section end -->
       <!-- arrival section start -->
+ 
       <div class="arrival_section layout_padding">
-         <div class="container">
+         <div class="row align-items-center">
+            <div class="col-md-8">
+               <div class="search-box" style="display: flex; align-items: center;">
+                  <input type="text" id="nameFilter" placeholder="Busca autores..." class="form-control" style="border-radius: 30px 0 0 30px; height: 45px;">
+                  <button class="search-btn" id="search-btn" style="border-radius: 0 30px 30px 0; height: 45px; margin-left: -1px;">
+                     <i class='bx bx-search'></i>
+                  </button>
+               </div>
+            </div>
+            <div class="col-md-4 text-right">
+               <button class="add-btn" onclick="openAddBookModal()" style="height: 45px; border-radius: 30px; margin-left: auto;">
+                  <i class='bx bx-plus'></i> Agregar Autor
+               </button>
+            </div>
+         </div>
+         <div id="addBookModal" class="modal" style="display:none;">
+            <div class="modal-content">
+              <span class="close" onclick="document.getElementById('addBookModal').style.display='none'">&times;</span>
+              <h2>Agregar nuevo autor</h2>
+              <form id="bookForm">
+               <h3>Autor</h3>
+                <input type="text" id="AuthorName" placeholder="Autor" required>
+                <h3>Biografía</h3>
+                <input type="text" id="AuthorBiography" placeholder="Biografía">
+                <h3>Imagen</h3>
+                <input type="text" id="AuthorImage" placeholder="URL de la imagen">
+                <h3>Número de títulos</h3>
+                <input type="text" id="AuthorTitle" placeholder="Número de titulos">
+                <h3>Puntuación</h3>
+                <input type="text" id="AuthorStars" placeholder="Puntuacion ejemplo 5.0">
+                <button type="button" id="botton" onclick="registerAuthor()" class="guardar">Guardar</button>
+              </form>
+            </div>
+          </div>
+<div id="modifiqueBookModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('modifiqueBookModal').style.display='none'">&times;</span>
+    <h2>Editar autor</h2>
+    <form id="modifyBookForm">
+      <input type="hidden" id="AuthorIdModifique">
+      <h3>Autor</h3>
+      <input type="text" id="AuthorNameModifique" placeholder="Autor" required>
+      <h3>Biografía</h3>
+      <input type="text" id="AuthorBiographyModifique" placeholder="Biografía">
+      <h3>Imagen</h3>
+      <img src="" width="100%" height="300px" id="imageModifique">
+      <input type="text" id="AuthorImageModifique" placeholder="URL de la imagen">
+      <h3>Número de títulos</h3>
+      <input type="text" id="AuthorTitleModifique" placeholder="Número de títulos">
+      <h3>Puntuación</h3>
+      <input type="text" id="AuthorStarsModifique" placeholder="Puntuación, ejemplo 5.0">
+      <button type="button" id="edit" onclick="updateAuthor(document.getElementById('AuthorIdModifique').value)" class="guardar">Editar</button>
+      <button type="button" id="dele" onclick="deleteAuthor(document.getElementById('AuthorIdModifique').value)" class="guardar">Eliminar</button>
+    </form>
+  </div>
+</div>
+
+
+         <div class="container" id="pao" onload="getAuthor();">
             <div class="row">
                <div class="col-sm-6 col-lg-4">
                   <div class="image_1">
@@ -315,5 +375,6 @@
              uiLibrary: 'bootstrap4'
          });
       </script>
+      <script src="js/authors.js"></script>
    </body>
 </html>

@@ -32,14 +32,18 @@ public class book {
     @JoinColumn(name = "id_author_book")
     private author id_author_book;
 
+    @Column(name="stars", length = 1, nullable = false)
+    private int stars;
 
-    public book(int id_book, String name_book,String image, country id_country, editorial id_editorial, author id_author_book) {
+
+    public book(int id_book, String name_book,String image, country id_country, editorial id_editorial, author id_author_book,int stars) {
         this.id_book=id_book;
         this.name_book=name_book;
         this.image=image;
         this.id_country=id_country;
         this.id_editorial=id_editorial;
         this.id_author_book=id_author_book;
+        this.stars=stars;
     }
     public book(){
     }
@@ -78,5 +82,11 @@ public class book {
     }
     public author get_id_author_book(){
         return id_author_book;
+    }
+    public void set_stars(int stars) {
+        this.stars = stars;
+    }
+    public int get_stars(){
+        return stars;
     }
 }

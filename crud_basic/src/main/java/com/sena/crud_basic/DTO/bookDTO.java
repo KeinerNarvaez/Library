@@ -19,14 +19,16 @@ public class bookDTO {
 
     private int id_author_book;
 
+    private int stars;
 
-    public bookDTO(int id_book, String name_book,String image, int id_country, int id_editorial, int id_author_book) {
+    public bookDTO(int id_book, String name_book,String image, int id_country, int id_editorial, int id_author_book,int stars) {
         this.id_book=id_book;
         this.name_book=name_book;
         this.image=image;
         this.id_country=id_country;
         this.id_editorial=id_editorial;
         this.id_author_book=id_author_book;
+        this.stars=stars;
     }
     public void set_id_book(int id_book) {
         this.id_book = id_book;
@@ -63,5 +65,11 @@ public class bookDTO {
     }
     public int get_id_author_book(){
         return id_author_book;
+    }
+    public void set_stars(int stars) {
+        this.stars = stars;
+    }
+    public int get_stars(){
+        return stars;
     }
 }
