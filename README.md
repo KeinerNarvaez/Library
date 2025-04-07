@@ -1,7 +1,7 @@
 # 📚 Library — Sistema de Gestión de Libros
 
 <p align="center">
-![Logo de pagina](images/b650f9cb-a484-424a-984d-117c6dd42023.webp "Logo de pagina")
+![Logo de pagina](./images/b650f9cb-a484-424a-984d-117c6dd42023.webp "Logo de pagina")
 </p>
 
 > Proyecto desarrollado como parte de una petición del instructor Carlos Cadena. Utiliza lenguajes de programación y demas cosas como Java, JavaScript, HTML, CSS y MySQL para construir un sistema completo con backend y frontend integrados.
