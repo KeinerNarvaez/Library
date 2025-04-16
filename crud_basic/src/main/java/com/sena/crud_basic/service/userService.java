@@ -36,6 +36,9 @@ public class userService {
     public List<user> getListUserForName(String email,String password) {
         return data.getListUserForName(email,password);
     }
+    public List<user> getname(String Filter) {
+        return data.getname(Filter);
+    }
 
     public Optional<user> findById(int id) {
         return data.findById(id);

@@ -10,7 +10,8 @@ import jakarta.persistence.JoinColumn;
 
 
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 @Entity(name = "loan_detail")
 public class loan_detail {
@@ -27,7 +28,7 @@ public class loan_detail {
     private String state;
     
     @Column(name="return_date", nullable = false)
-    private LocalDate return_date;
+    private LocalDateTime return_date;
     
     @ManyToOne
     @JoinColumn(name = "id_book")
@@ -35,7 +36,7 @@ public class loan_detail {
 
     
 
-    public loan_detail(int id_loan_detail, bill_loan id_bill, String state, LocalDate return_date, book id_book){
+    public loan_detail(int id_loan_detail, bill_loan id_bill, String state, LocalDateTime return_date, book id_book){
         this.id_loan_detail=id_loan_detail;
         this.id_bill=id_bill;
         this.state=state;
@@ -63,10 +64,10 @@ public class loan_detail {
     public String get_state(){
         return state;
     }
-    public void set_return_date(LocalDate return_date) {
+    public void set_return_date(LocalDateTime return_date) {
         this.return_date = return_date;
     }
-    public LocalDate get_return_date(){
+    public LocalDateTime get_return_date(){
         return return_date;
     }
     public void set_id_book(book id_book) {

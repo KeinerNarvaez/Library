@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 
@@ -20,8 +20,8 @@ public class bill_loan {
 
 
     @ManyToOne
-    @JoinColumn(name = "id_user_rol")
-    private user_rol id_user_rol;
+    @JoinColumn(name = "id_user")
+    private user id_user;
     
     @Column(name="state", length = 20, nullable = false)
     private String state;
@@ -30,14 +30,14 @@ public class bill_loan {
     private String code;
 
     @Column(name="date", nullable = false)
-    private LocalDate date;
+    private LocalDateTime date;
 
-    public bill_loan(int id_bill, String state, String code, LocalDate date, user_rol id_user_rol){
+    public bill_loan(int id_bill, String state, String code, LocalDateTime date, user id_user){
         this.id_bill=id_bill;
         this.state=state;
         this.code=code;
         this.date=date;
-        this.id_user_rol=id_user_rol;
+        this.id_user=id_user;
     }
     public bill_loan(){
     }
@@ -47,11 +47,11 @@ public class bill_loan {
     public int get_id_bill(){
         return id_bill;
     }                                                                                                   
-    public void set_id_user_rol(user_rol id_user_rol) {
-        this.id_user_rol = id_user_rol;
+    public void set_id_user(user id_user) {
+        this.id_user = id_user;
     }
-    public user_rol get_id_user_rol(){
-        return id_user_rol;
+    public user get_id_user(){
+        return id_user;
     }
     public void set_state(String state) {
         this.state = state;
@@ -65,10 +65,10 @@ public class bill_loan {
     public String get_code(){
         return code;
     }
-    public void set_date(LocalDate date) {
+    public void set_date(LocalDateTime date) {
         this.date = date;
     }
-    public LocalDate get_date(){
+    public LocalDateTime get_date(){
         return date;
     }
 

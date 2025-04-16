@@ -28,7 +28,7 @@ public class user_rolController {
     @Autowired
     private user_rolService user_rolService;
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Object> registerUser_rol(@RequestBody user_rolDTO user_rol) {
         responseDTO respuesta = user_rolService.save(user_rol);
         return new ResponseEntity<>(respuesta, respuesta.getStatus());

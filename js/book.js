@@ -235,7 +235,10 @@ async function getCountry() {
         option.value = country["_id_country"];
         option.textContent = country['_country'];
         select.appendChild(option);
-        selectModifique.appendChild(option);
+        const option2 = document.createElement("option");
+        option2.value = country["_id_country"];
+        option2.textContent = country['_country'];
+        selectModifique.appendChild(option2);
       });
   
     } catch (error) {
@@ -302,7 +305,10 @@ async function getGenre() {
         option.value = country["_id_editorial"];
         option.textContent = country['_editorial'];
         select.appendChild(option);
-        selectModifique.appendChild(option);
+        const option2 = document.createElement("option");
+        option2.value = country["_id_editorial"];
+        option2.textContent = country['_editorial'];
+        selectModifique.appendChild(option2);
       });
   
     } catch (error) {
@@ -340,7 +346,10 @@ async function getGenre() {
         option.value = country["_id_author"];
         option.textContent = country['_author_name'];
         select.appendChild(option);
-        selectModifique.appendChild(option);
+        const option2 = document.createElement("option");
+        option2.value = country["_id_author"];
+        option2.textContent = country['_author_name'];
+        selectModifique.appendChild(option2);
       });
   
     } catch (error) {

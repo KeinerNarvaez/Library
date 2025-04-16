@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -52,5 +53,13 @@ public class bill_loanController {
         var message= bill_loanService.delete(id);
         
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+        @PutMapping("/{id}")
+    public ResponseEntity<responseDTO> updatebill_loan(
+            @PathVariable int id,
+            @RequestBody bill_loanDTO bill_loanDTO) {
+        
+        responseDTO respuesta = bill_loanService.update(id, bill_loanDTO);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
 }

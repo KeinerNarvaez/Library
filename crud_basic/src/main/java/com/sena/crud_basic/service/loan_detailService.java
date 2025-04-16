@@ -1,5 +1,6 @@
 package com.sena.crud_basic.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +79,7 @@ public class loan_detailService {
             0,  
             billLoan,
             loan_detailDTO.get_state(),
-            loan_detailDTO.get_return_date(),
+            LocalDateTime.now(),
             book
         );
     }

@@ -14,9 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import com.sena.crud_basic.service.recapchatService;
 
 
 @RestController
@@ -31,9 +33,16 @@ public class userController {
      */
     @Autowired
     private userService userService;
+    @Autowired
+    private recapchatService recapchatService;
 
     @PostMapping("/")
-    public ResponseEntity<Object> registerUser(@RequestBody userDTO user) {
+    public ResponseEntity<Object> registerUser(@RequestBody userDTO user,@RequestParam("g-recaptcha-response") String captchaToken) {
+        boolean isCaptchaValid = recapchatService.validateRecaptcha(captchaToken);
+        if (!isCaptchaValid) {
+            return new ResponseEntity<>("reCAPTCHA inválido", HttpStatus.UNAUTHORIZED);
+        }
+    
         responseDTO respuesta = userService.save(user);
         return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
@@ -62,6 +71,11 @@ public class userController {
         if (userList.isEmpty()) {
             return new ResponseEntity<>("Credenciales incorrectas", HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(userList, HttpStatus.OK);
+    }
+    @GetMapping("/filter/{filter}")
+    public ResponseEntity<Object> getname(@PathVariable String filter) {
+        var userList = userService.getname(filter);
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
     
