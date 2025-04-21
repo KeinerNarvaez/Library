@@ -18,5 +18,7 @@ public interface Iuser extends JpaRepository
     @Query("SELECT u FROM user u WHERE u.email like %?1%")
     List<user> getname(String Filter);
 
+    @Query("SELECT u FROM user u WHERE u.id_user = ?1")
+    List<user> getUserById(int id);
 
 }

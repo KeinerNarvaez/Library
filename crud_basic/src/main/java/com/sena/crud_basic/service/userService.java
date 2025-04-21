@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @Service
 public class userService {
-
     /*
      * save
      * findAll
@@ -27,10 +26,7 @@ public class userService {
     private Iuser data;
 
     public List<user> findAll() {
-
-        // return data.findAll();
         return data.getListUserActive();
-
     }
 
     public List<user> getListUserForName(String email,String password) {
@@ -39,7 +35,9 @@ public class userService {
     public List<user> getname(String Filter) {
         return data.getname(Filter);
     }
-
+    public List<user> getUserById(int id) {
+        return data.getUserById(id);
+    }
     public Optional<user> findById(int id) {
         return data.findById(id);
     }
@@ -61,7 +59,35 @@ public class userService {
                 "Se eliminó correctamente");
         return respuesta;
     }
+    public responseDTO update(int id, userDTO userDTO) {
+        Optional<user> userOptional = findById(id);
+        
+        if (!userOptional.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "El usuario no existe");
+        }
+    
+        // Validación del nombre
+        if (userDTO.get_name().length() < 1 || userDTO.get_name().length() > 50) {
+            return new responseDTO(HttpStatus.BAD_REQUEST, "El nombre debe tener entre 1 y 50 caracteres");
+        }
+    
+        try {
+            user existingUser = userOptional.get();
+            existingUser.set_breedName(userDTO.get_name());
+            existingUser.setEmail(userDTO.getEmail());
+            existingUser.set_password(userDTO.get_password());
+            existingUser.set_number(userDTO.get_number());
 
+    
+            data.save(existingUser);
+    
+            return new responseDTO(HttpStatus.OK, "Usuario actualizado correctamente");
+    
+        } catch (Exception e) {
+            return new responseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar: " + e.getMessage());
+        }
+    }
+    
     // register and update
     public responseDTO save(userDTO userDTO) {
         // validación longitud del nombre

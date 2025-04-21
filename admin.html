@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <title>Administracion</title>
+    <style>
+        html, body {
+          height: 100%;
+          padding: 0;
+          margin: 0;
+          background-color: #343a40;
+          color: white;
+        }
+    
+        .main-container {
+          display: flex;
+          height: 100vh;
+        }
+    
+        .sidebar-dark {
+          background-color: #212529;
+          width: 280px;
+          padding: 1rem;
+          border-right: 1px solid #495057;
+        }
+    
+        .nav-link {
+          color: #adb5bd;
+        }
+    
+        .nav-link:hover,
+        .nav-link.active {
+          color: #fff;
+          background-color: #495057;
+        }
+    
+        .dropdown-toggle {
+          color: #fff;
+        }
+    
+        .dropdown-menu {
+          background-color: #343a40;
+        }
+    
+        .dropdown-item {
+          color: #fff;
+        }
+    
+        .dropdown-item:hover {
+          background-color: #495057;
+        }
+    
+        .content {
+          flex-grow: 1;
+          padding: 2rem;
+        }
+        
+      </style>
+</head>
+<body>
+
+
+    <div class="main-container">
+        <!-- Sidebar a la izquierda -->
+        <div class="d-flex flex-column sidebar-dark">
+          <a href="/" class="d-flex align-items-center mb-3 text-white text-decoration-none">
+            <img src="images/b650f9cb-a484-424a-984d-117c6dd42023.webp" style="width:30%; border-radius: 30px;  max-width: 40%;background: #ffffff;">
+            <span class="fs-4" style="margin-left: 9px;">Panel de administración</span>
+          </a>
+          <hr class="border-secondary">
+          <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+              <a href="#" class="nav-link active" aria-current="page" id="inicio">
+                <i class="bi bi-house-door me-2"></i>
+                Inicio
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link" id="editorial">
+                <i class="bi bi-speedometer2 me-2"></i>
+                Editorial
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link" id="libros">
+                <i class="bi bi-table me-2"></i>
+                Libros reservados
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link" id="usuarios">
+                <i class="bi bi-people me-2"></i>
+                Usuarios
+              </a>
+            </li>
+            <li>
+              <a href="index.html" class="nav-link" id="usuarios">
+                <i class="bi bi-people me-2"></i>
+                Ir a inicio
+              </a>
+            </li>
+          </ul>
+          <hr class="border-secondary">
+          <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong id="per">Keiner</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+              <li><a class="dropdown-item" href="customizer.html">Perfil</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" id="cerrarSesion">Cerrar sesión</a></li>
+            </ul>
+          </div>
+        </div>
+      
+        <!-- Contenido user -->
+ 
+        <div class="content d-flex justify-content-center align-items-center">
+            <div class="card bg-dark text-white p-4 shadow rounded-4" id="user" style="max-width: 800px; width: 100%;display: none;">      
+              <h5 class="text-center mb-3">Registros actuales</h5>
+              <div id="userList" class="table-responsive">
+                <table class="table table-dark table-hover table-bordered align-middle">
+                  <thead class="table-secondary text-dark">
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Teléfono</th>
+                      <th>Rol</th>
+                      <th>Correo</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Aquíse agregan los registros dinámicamente con JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- CARD RESERVADOS -->
+            <div class="card bg-dark text-white p-4 shadow rounded-4" id="reservados" style="max-width: 1000px; width: 100%; display: none;">
+            <div id="updateReservados" style="display: none;">
+              <h3 class="mb-4 text-center">Agregar editorial</h3>
+            
+              <!-- FORMULARIO -->
+              <div class="mb-4" >
+                <div class="mb-3" style="display: none;">
+                  <input type="text"  id="idLoanCustomer" class="form-control bg-secondary text-white border-0" placeholder="Nombre del editorial">
+                </div>
+                <div class="mb-3" style="display: none;">
+                  <input type="text" id="idBillCustomer" class="form-control bg-secondary text-white border-0" placeholder="Nombre del editorial">
+                </div>
+                <div class="mb-3" style="display: none;">
+                  <input type="text" id="codeCustomer" class="form-control bg-secondary text-white border-0" placeholder="Nombre del editorial">
+                </div>
+                <div class="mb-3" style="display: none;">
+                  <input type="text" id="idEncargadoCustomer" class="form-control bg-secondary text-white border-0" placeholder="Nombre del editorial">
+                </div>
+                <div class="mb-3" style="display: none;">
+                  <input type="text" id="nameUserCustomer" class="form-control bg-secondary text-white border-0" placeholder="Nombre del editorial">
+                </div>
+                <div class="mb-3" style="display: none;">
+                  <input type="text" id="bookCustomer" class="form-control bg-secondary text-white border-0" placeholder="Nombre del editorial">
+                </div>
+                <div class="mb-3">
+                  <label for="selectState" class="form-label">Estado:</label>
+                  <select id="selectState" class="form-select bg-secondary text-white border-0">
+                    <option value="">-- Selecciona una opción --</option>
+                    <option value="Reservado">Reservado</option>
+                    <option value="Entregado">Entregado</option>
+                  </select>
+                </div>
+          
+                <div class="text-center">
+                  <button id="modifyReservados" style="width: 100%;margin-top: 10px" class="btn btn-primary px-4"  data-bs-toggle="modal">
+                      Modificar
+                  </button>
+                </div>
+              </div>
+          
+              <hr class="border-light">
+            </div>
+                <!-- LISTADO DE REGISTROS -->
+                <h5 class="text-center mb-3">Registros actuales</h5>
+                <div id="reservadosList" class="table-responsive">
+                  <table class="table table-dark table-hover table-bordered align-middle">
+                    <thead class="table-secondary text-dark">
+                      <tr>
+                        <th>nombre</th>
+                        <th>Estado</th>
+                        <th>Codigo</th>
+                        <th>Fecha</th>
+                        <th>Usuario encargado</th>
+                        <th>titulo</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- CARD EDITORIAL -->
+              <div class="card bg-dark text-white p-4 shadow rounded-4" id="edi" style="max-width: 800px; width: 100%; display: none;">
+                <h3 class="mb-4 text-center">Agregar editorial</h3>
+            
+                <!-- FORMULARIO -->
+                <div class="mb-4">
+                  <div class="mb-3">
+                    <label for="editorialCustomer" class="form-label">Nombre:</label>
+                    <input type="text" id="editorialCustomer" class="form-control bg-secondary text-white border-0" placeholder="Nombre del editorial">
+                  </div>
+            
+                  <div class="mb-3">
+                    <label for="descriptionCustomer" class="form-label">Descripcion:</label>
+                    <textarea name="" id="descriptionCustomer" class="form-control bg-secondary text-white border-0" id="" placeholder="Escribe una descripcion corta de la editorial"></textarea>
+                  </div>
+            
+                  <div class="mb-3">
+                    <label for="selectCountry" class="form-label">Pais:</label>
+                    <select id="selectCountry" class="form-select bg-secondary text-white border-0">
+                      <option value="">-- Selecciona una opción --</option>
+                    </select>
+                  </div>
+                  <input type="text" style="display: none;" id="idEditorial">
+            
+                  <div class="text-center">
+                    <button id="addEditorial" style="width: 100%;margin-top: 10px;" class="btn btn-primary px-4"  data-bs-toggle="modal">
+                        Guardar
+                    </button>
+                    <button id="modifyEditorial" style="width: 100%;margin-top: 10px;display: none;" class="btn btn-primary px-4"  data-bs-toggle="modal">
+                        Modificar
+                    </button>
+                  </div>
+                </div>
+            
+                <hr class="border-light">
+            
+                <!-- LISTADO DE REGISTROS -->
+                <h5 class="text-center mb-3">Registros actuales</h5>
+                <div id="editorialList" class="table-responsive">
+                  <table class="table table-dark table-hover table-bordered align-middle">
+                    <thead class="table-secondary text-dark">
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Pais</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+                <div style="text-align: center;" id="home">
+                  <h1>¡Bienvenido al super usuario de la biblioteca! <br> <span id="peo">Keiner</span></h1>
+                </div>
+          </div>
+    <script src="js/adminLoan.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

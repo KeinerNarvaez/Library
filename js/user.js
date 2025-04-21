@@ -159,11 +159,11 @@ async function RegisterLogin(email, password) {
             alert("Credenciales incorrectas.");
         } else {
             alert("¡Inicio de sesión exitoso!");
-            window.location.href = "index.html";
         }
         data.forEach(user => {
             localStorage.setItem("userId", user["id_user"]); 
             localStorage.setItem("userName", user['_name']);  
+            getRolUser(user["id_user"]);
         });
 
     } catch (error) {
@@ -176,7 +176,6 @@ document.getElementById("sign-login").addEventListener("click", async function (
     let email = document.getElementById("userEmailLogin").value;
     let password = document.getElementById("userPasswordLogin").value;
     await RegisterLogin(email, password);
-    window.location.href = "index.html";
 });
 async function getRoles() {
     const url = `http://localhost:8085/api/v1/roles/Listroles`;
@@ -217,3 +216,33 @@ async function getRoles() {
 document.addEventListener("DOMContentLoaded", () => {
     getRoles();
 });
+async function getRolUser(userId) {
+    const url = `http://localhost:8085/api/v1/user_rol/filter/${userId}`;
+  
+    let headersList = {
+      "Accept": "*/*",
+      "User-Agent": "web",
+      "Content-Type": "application/json"
+    };
+  
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: headersList
+      });
+
+      
+      const rol = await response.json();
+      if (rol.length === 0) {
+        window.location.href = "customizer.html";
+      } else {
+        window.location.href = "index.html";
+      }
+      console.log(rol);
+
+
+  
+    } catch (error) {
+      console.error("Error al obtener el rol del usuario:", error);
+    }
+}

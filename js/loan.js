@@ -7,8 +7,9 @@ function Codigo(numero) {
     }
     return result;  
 }
-codigo=Codigo(6);
-document.getElementById("codigo-text").innerText=codigo;
+codigo = Codigo(6);
+document.getElementById("codigo-text").innerText = codigo;
+
 async function registerLoan() {
     try {
         let headersList = {
@@ -19,9 +20,9 @@ async function registerLoan() {
 
         let bodyContent = JSON.stringify({
             "id_user": localStorage.getItem("userId"),
-            "code":codigo,
-            "state":"Pendiente" 
-            
+            "code": codigo,
+            "state": "Reservado",
+            "name_customer": document.getElementById("nameCustomer").value
         });
 
         const response = await fetch("http://localhost:8085/api/v1/bill_loan/", {
@@ -35,49 +36,62 @@ async function registerLoan() {
             return;
         }
 
-        const data = await response.text();
-        console.log(data);
-        console.log('Funciona');
+        const data = await response.json();
+        const idGenerado = data.object._id_bill;
+        console.log("ID generado:", idGenerado);
+
+        await registerLoan_detail(idGenerado);
+        const modalElement = document.getElementById('exampleModal');
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
+        document.body.classList.remove('modal-open');
+        document.querySelector('.modal-backdrop')?.remove();
+        setTimeout(() => {
+            alert("Préstamo creado correctamente.");
+        }, 1000);
+
 
     } catch (error) {
+        alert("Error inesperado en bill_loan:", error);
         console.error("Error inesperado:", error);
     }
 }
-async function registerLoan_detail() {
+
+async function registerLoan_detail(idGenerado) {
     try {
-        let headersList = {
-            "Accept": "*/*",
-            "User-Agent": "web",
-            "Content-Type": "application/json"
-        };
+        const id_user = localStorage.getItem("userId");
 
-        let bodyContent = JSON.stringify({
-            "id_user": localStorage.getItem("userId"),
-            "id_bill": 0,
-            "state":"Pendiente",
-            "id_book": document.getElementById("bookSelect").value,
-            
-        });
+        for (const book of selectedBooks) {
+            const body = JSON.stringify({
+                id_user: id_user,
+                id_bill: idGenerado,
+                id_book: book.id,
+                state: "Reservado"
+            });
 
-        const response = await fetch("http://localhost:8085/api/v1/bill_loan/", {
-            method: "POST",
-            body: bodyContent,
-            headers: headersList
-        });
+            const response = await fetch("http://localhost:8085/api/v1/loan_detail/", {
+                method: "POST",
+                headers: {
+                    "Accept": "*/*",
+                    "User-Agent": "web",
+                    "Content-Type": "application/json"
+                },
+                body: body
+            });
 
-        if (!response.ok) {
-            console.error("Error al registrar bill_loan:", response.status);
-            return;
+            if (!response.ok) {
+                console.error("Error al registrar loan_detail:", response.status);
+            } else {
+                const data = await response.text();
+                console.log("Loan detail creado:", data);
+            }
         }
 
-        const data = await response.text();
-        console.log(data);
-        console.log('Funciona');
-
     } catch (error) {
-        console.error("Error inesperado:", error);
+        console.error("Error al registrar loan_detail:", error);
     }
 }
+
 async function getBook() {
     const url = `http://localhost:8085/api/v1/book/`;
   
@@ -124,9 +138,7 @@ const addBookBtn = document.getElementById('addBookBtn');
 const createLoanBtn = document.getElementById('createLoanBtn');
 const bookSelect = document.getElementById('bookSelect');
 const booksList = document.getElementById('books-list');
-const clientNameInput = document.getElementById('clientName');
-const loanDateInput = document.getElementById('loanDate');
-
+const nameCustomer = document.getElementById('nameCustomer');
 let selectedBooks = [];
 
 addBookBtn.addEventListener('click', () => {
@@ -159,40 +171,10 @@ function removeBook(bookId) {
 }
 
 createLoanBtn.addEventListener('click', async () => {
-    if (!clientNameInput.value || !loanDateInput.value || selectedBooks.length === 0) {
+    if (selectedBooks.length === 0|| nameCustomer.value === "") {
         alert('Por favor, complete todos los campos.');
         return;
     }
+    registerLoan();
 
-    const loanDetails = selectedBooks.map(book => ({
-        id_book: book.id,
-        state: 'active',
-        return_date: loanDateInput.value
-    }));
-
-    const loanData = {
-        clientName: clientNameInput.value,
-        state: loanDateInput.value,
-        loanDetails: loanDetails
-    };
-
-    try {
-        const response = await fetch('http://localhost:8085/api/v1/loan_detail/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(loanData)
-        });
-
-        const result = await response.json();
-        if (response.ok) {
-            alert('Préstamo creado exitosamente.');
-        } else {
-            alert('Error al crear el préstamo: ' + result.message);
-        }
-    } catch (error) {
-        console.error('Error al crear el préstamo:', error);
-        alert('Hubo un problema al realizar la solicitud.');
-    }
 });

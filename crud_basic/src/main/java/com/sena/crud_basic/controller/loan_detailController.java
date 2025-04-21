@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sena.crud_basic.DTO.loan_detailDTO;
 import com.sena.crud_basic.DTO.responseDTO;
+
 import com.sena.crud_basic.service.loan_detailService;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
@@ -34,7 +36,6 @@ public class loan_detailController {
     @GetMapping("/")
     public ResponseEntity<Object> getAllloan_detail() {
         var lista = loan_detailService.findAll();
-        // List<user> listaUsuariO2= userService.findAll();
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
     @GetMapping("/{id}")
@@ -44,9 +45,19 @@ public class loan_detailController {
             return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(loan_detail, HttpStatus.OK);
     }
-        @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id) {
         var message= loan_detailService.delete(id); 
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+    @GetMapping("/filter/{id_user}")
+    public ResponseEntity<Object> getUserByUserBillId(@PathVariable int id_user) {
+        var userList = loan_detailService.getUserByBillId(id_user);
+        return new ResponseEntity<>(userList, HttpStatus.OK);
+    }    
+    @PutMapping("/{id}")
+    public ResponseEntity<responseDTO> updateloan_detail(@PathVariable int id,@RequestBody loan_detailDTO loan_detailDTO) {
+        responseDTO respuesta = loan_detailService.update(id, loan_detailDTO);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
 }

@@ -41,7 +41,7 @@ public class bookService {
     }
     public List<book> getListBookForName(String filter) {
         return bookRepository.getListBookForName(filter);
-     }
+    }
     public List<book> getListBookForStars(int filter) {
         return bookRepository.getListBookForStars(filter);
     }
@@ -107,10 +107,10 @@ public class bookService {
     
     public responseDTO save(bookDTO bookDTO) {  
         if (bookDTO.get_name_book().length() < 1 ||
-        bookDTO.get_name_book().length() > 20) {
+        bookDTO.get_name_book().length() > 100) {
             responseDTO respuesta = new responseDTO(
             HttpStatus.BAD_REQUEST,
-            "El nombre debe estar entre 1 y 20 caracteres");
+            "El nombre debe estar entre 1 y 100 caracteres");
         return respuesta;
         }
         // Validar existencia de country

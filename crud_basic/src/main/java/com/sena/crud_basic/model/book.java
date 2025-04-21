@@ -14,7 +14,7 @@ public class book {
     @Column(name="id_book", nullable = false)
     private int id_book;
     
-    @Column(name="name_book", length = 20, nullable = false)
+    @Column(name="name_book", length = 100, nullable = false)
     private String name_book;
     @Lob
     @Column(name="image", nullable = false)

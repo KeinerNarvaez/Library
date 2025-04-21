@@ -7,13 +7,15 @@ public class bill_loanDTO {
     private String state;
     private String code;
     private LocalDateTime date;
+    private String name_customer;
 
-    public bill_loanDTO(int id_bill, String state, String code, LocalDateTime date, int id_user){
+    public bill_loanDTO(int id_bill, String state, String code, LocalDateTime date, int id_user, String name_customer){
         this.id_bill=id_bill;
         this.state=state;
         this.code=code;
         this.date=date;
         this.id_user=id_user;
+        this.name_customer=name_customer;
     }
    
 	public void set_id_bill(int id_bill) {
@@ -45,5 +47,11 @@ public class bill_loanDTO {
     }
     public LocalDateTime get_date(){
         return date;
+    }
+    public void set_name_customer(String name_customer) {
+        this.name_customer = name_customer;
+    }
+    public String get_name_customer(){
+        return name_customer;
     }
 }

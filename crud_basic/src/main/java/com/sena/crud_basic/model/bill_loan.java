@@ -32,12 +32,16 @@ public class bill_loan {
     @Column(name="date", nullable = false)
     private LocalDateTime date;
 
-    public bill_loan(int id_bill, String state, String code, LocalDateTime date, user id_user){
+    @Column(name="name_customer",length = 100, nullable = false)
+    private String name_customer;
+
+    public bill_loan(int id_bill, String state, String code, LocalDateTime date, user id_user, String name_customer){
         this.id_bill=id_bill;
         this.state=state;
         this.code=code;
         this.date=date;
         this.id_user=id_user;
+        this.name_customer=name_customer;
     }
     public bill_loan(){
     }
@@ -70,6 +74,12 @@ public class bill_loan {
     }
     public LocalDateTime get_date(){
         return date;
+    }
+    public void set_name_customer(String name_customer) {
+        this.name_customer = name_customer;
+    }
+    public String get_name_customer(){
+        return name_customer;
     }
 
 }

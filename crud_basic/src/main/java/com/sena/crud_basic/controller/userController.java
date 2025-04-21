@@ -2,6 +2,7 @@ package com.sena.crud_basic.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.sena.crud_basic.DTO.responseDTO;
 import com.sena.crud_basic.DTO.userDTO;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,13 +79,17 @@ public class userController {
     public ResponseEntity<Object> getname(@PathVariable String filter) {
         var userList = userService.getname(filter);
         return new ResponseEntity<>(userList, HttpStatus.OK);
-    }
+    }    
     
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable int id) {
         var message = userService.deleteUser(id);
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<responseDTO> updateuser(@PathVariable int id,@RequestBody userDTO userDTO) {
+        responseDTO respuesta = userService.update(id, userDTO);
+        return new ResponseEntity<>(respuesta, respuesta.getStatus());
     }
 
 }

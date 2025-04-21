@@ -26,12 +26,16 @@ public class loan_detailService {
     @Autowired
     private bill_loanService billLoanService;
 
+    public List<loan_detail> getUserByBillId(int id) {
+        return loanDetailRepository.getUserByBillId(id);
+    }
     public Optional<loan_detail> findById(int id) {
         return loanDetailRepository.findById(id);
     }
-        public List<loan_detail> findAll() {
+    public List<loan_detail> findAll() {
       return loanDetailRepository.findAll();
    }
+   
 
     public responseDTO delete(int id) {
         Optional<loan_detail> loanDetailOptional = findById(id);
@@ -63,7 +67,34 @@ public class loan_detailService {
       loanDetailRepository.save(loanDetailRecord);
       return new responseDTO(HttpStatus.OK, "Loan detail saved correctly.");
   }
+  public responseDTO update(int id, loan_detailDTO loan_detailDTO) {
+    Optional<loan_detail> existingLoanDetail = loanDetailRepository.findById(id);
+    if (!existingLoanDetail.isPresent()) {
+        return new responseDTO(HttpStatus.NOT_FOUND, "Loan detail not found.");
+    }
 
+    // Validar existencia del libro
+    Optional<book> bookOptional = bookService.findById(loan_detailDTO.get_id_book());
+    if (!bookOptional.isPresent()) {
+        return new responseDTO(HttpStatus.NOT_FOUND, "The book with ID " + loan_detailDTO.get_id_book() + " does not exist.");
+    }
+
+    // Validar existencia de la factura
+    Optional<bill_loan> billLoanOptional = billLoanService.findById(loan_detailDTO.get_id_bill());
+    if (!billLoanOptional.isPresent()) {
+        return new responseDTO(HttpStatus.NOT_FOUND, "The bill loan with ID " + loan_detailDTO.get_id_bill() + " does not exist.");
+    }
+
+    // Actualizar la entidad existente
+    loan_detail loanToUpdate = existingLoanDetail.get();
+    loanToUpdate.set_id_bill(billLoanOptional.get());
+    loanToUpdate.set_state(loan_detailDTO.get_state());
+    loanToUpdate.set_return_date(LocalDateTime.now());
+    loanToUpdate.set_id_book(bookOptional.get());
+
+    loanDetailRepository.save(loanToUpdate);
+    return new responseDTO(HttpStatus.OK, "Loan detail updated correctly.");
+}
     public loan_detailDTO convertToDTO(loan_detail loanDetail) {
         return new loan_detailDTO(
             loanDetail.get_id_loan_detail(),
