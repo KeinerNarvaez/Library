@@ -1,5 +1,7 @@
 package com.sena.crud_basic.DTO;
 import java.time.LocalDateTime;
+
+import com.sena.crud_basic.model.roles;
 public class userDTO {
 
 
@@ -19,8 +21,9 @@ public class userDTO {
    private LocalDateTime registration_date;
 
    private boolean status;
+   private roles roles;
    public userDTO(int id_user, String name, String email, String password, String number,
-         LocalDateTime registration_date, boolean status) {
+         LocalDateTime registration_date, boolean status, roles roles) {
       this.id_user = id_user;
       this.name = name;
       this.email = email;
@@ -28,6 +31,7 @@ public class userDTO {
       this.number = number;
       this.registration_date = registration_date;
       this.status = status;
+      this.roles = roles;
    }
 
    // get del ID
@@ -92,5 +96,11 @@ public class userDTO {
 
    public void setStatus(boolean status) {
       this.status = status;
+   }
+   public roles getRole() {
+      return roles;
+   }
+   public void setRole(roles roles) {
+      this.roles = roles;
    }
 }

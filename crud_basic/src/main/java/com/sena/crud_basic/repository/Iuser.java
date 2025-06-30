@@ -1,5 +1,7 @@
 package com.sena.crud_basic.repository;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -20,5 +22,12 @@ public interface Iuser extends JpaRepository
 
     @Query("SELECT u FROM user u WHERE u.id_user = ?1")
     List<user> getUserById(int id);
+    
+    Optional<user> findByEmail(String email);
+    Optional<user> findByUsername(String name);
+
+
+
+    List<user> findAllByStatus(boolean status);
 
 }

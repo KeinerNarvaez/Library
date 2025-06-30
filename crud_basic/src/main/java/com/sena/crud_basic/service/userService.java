@@ -1,136 +1,123 @@
 package com.sena.crud_basic.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-
-import com.sena.crud_basic.DTO.responseDTO;
-import com.sena.crud_basic.DTO.userDTO;
-import com.sena.crud_basic.model.user;
-import com.sena.crud_basic.repository.Iuser;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.sena.crud_basic.DTO.RequestLoginDTO;
+import com.sena.crud_basic.DTO.RequestRegisterUserDTO;
+import com.sena.crud_basic.DTO.ResponseLogin;
+import com.sena.crud_basic.DTO.responseDTO;
+import com.sena.crud_basic.DTO.userDTO;
+import com.sena.crud_basic.jwt.jwtServices;
+import com.sena.crud_basic.model.roles;
+import com.sena.crud_basic.model.user;
+import com.sena.crud_basic.repository.Iuser;
+
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class userService {
-    /*
-     * save
-     * findAll
-     * findById
-     * Delete
-     */
-    /* establish connection with the interface */
-    @Autowired
-    private Iuser data;
+
+    private final Iuser data;
+    private final jwtServices jwtService;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     public List<user> findAll() {
-        return data.getListUserActive();
+        return data.findAll();
     }
 
-    public List<user> getListUserForName(String email,String password) {
-        return data.getListUserForName(email,password);
-    }
-    public List<user> getname(String Filter) {
-        return data.getname(Filter);
-    }
-    public List<user> getUserById(int id) {
-        return data.getUserById(id);
-    }
     public Optional<user> findById(int id) {
         return data.findById(id);
     }
 
-    public responseDTO deleteUser(int id) {
-        Optional<user> user=findById(id);
-        if (!user.isPresent()) {
-            responseDTO respuesta = new responseDTO(
-                    HttpStatus.OK,
-                    "The register does not exist");
-            return respuesta;
-        }
-        user.get().setStatus(false);
-        data.save(user.get());
-        // data.deleteById(id);
-        
-        responseDTO respuesta = new responseDTO(
-                HttpStatus.OK,
-                "Se eliminó correctamente");
-        return respuesta;
+    public Optional<user> findByUsername(String username) {
+        return data.findByUsername(username);
     }
-    public responseDTO update(int id, userDTO userDTO) {
-        Optional<user> userOptional = findById(id);
-        
-        if (!userOptional.isPresent()) {
+
+    public Optional<user> findByEmail(String email) {
+        return data.findByEmail(email);
+    }
+
+    public responseDTO deleteUser(int id) {
+        Optional<user> usuario = findById(id);
+        if (!usuario.isPresent()) {
             return new responseDTO(HttpStatus.NOT_FOUND, "El usuario no existe");
         }
-    
-        // Validación del nombre
-        if (userDTO.get_name().length() < 1 || userDTO.get_name().length() > 50) {
-            return new responseDTO(HttpStatus.BAD_REQUEST, "El nombre debe tener entre 1 y 50 caracteres");
-        }
-    
-        try {
-            user existingUser = userOptional.get();
-            existingUser.set_breedName(userDTO.get_name());
-            existingUser.setEmail(userDTO.getEmail());
-            existingUser.set_password(userDTO.get_password());
-            existingUser.set_number(userDTO.get_number());
 
-    
-            data.save(existingUser);
-    
-            return new responseDTO(HttpStatus.OK, "Usuario actualizado correctamente");
-    
-        } catch (Exception e) {
-            return new responseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar: " + e.getMessage());
-        }
-    }
-    
-    // register and update
-    public responseDTO save(userDTO userDTO) {
-        // validación longitud del nombre
-        if (userDTO.get_name().length() < 1 ||
-                userDTO.get_name().length() > 50) {
-            responseDTO respuesta = new responseDTO(
-                    HttpStatus.BAD_REQUEST,
-                    "El nombre debe estar entre 1 y 50 caracteres");
-            return respuesta;
-        }
-        // otras condiciones
-        // n
-        user userRegister = converToModel(userDTO);
-        data.save(userRegister);
-        responseDTO respuesta = new responseDTO(
-                HttpStatus.OK,
-                "Se guardó correctamente");
-        return respuesta;
+        data.deleteById(id);
+        return new responseDTO(HttpStatus.OK, "Usuario eliminado correctamente");
     }
 
-    public userDTO convertToDTO(user user) {
-        userDTO userdto = new userDTO(
-                user.getId_user(),
-                user.get_name(),
-                user.getEmail(),
-                user.get_password(),
-                user.get_number(),
-                user.get_registration_date(),
-                user.getStatus()
-                );
-        return userdto;
+    public responseDTO save(RequestRegisterUserDTO userDTO) {
+        user usuario = convertToModelRegister(userDTO);
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        data.save(usuario);
+        return new responseDTO(HttpStatus.OK, "Usuario guardado correctamente");
     }
 
-    public user converToModel(userDTO userDTO) {
-        user user = new user(
+    public ResponseLogin login(RequestLoginDTO login) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        login.getUsername(),
+                        login.getPassword()));
+        UserDetails userDetails = data.findByUsername(login.getUsername()).orElseThrow();
+        return new ResponseLogin(jwtService.getToken(userDetails));
+    }
+
+    public responseDTO updateUser(int id, userDTO userDTO) {
+        Optional<user> usuario = findById(id);
+        if (!usuario.isPresent()) {
+            return new responseDTO(HttpStatus.NOT_FOUND, "El usuario no existe");
+        }
+
+        user updatedUser = usuario.get();
+        updatedUser.setUsername(userDTO.get_name());
+        updatedUser.setPassword(passwordEncoder.encode(userDTO.get_password()));
+        updatedUser.setEmail(userDTO.getEmail());
+        updatedUser.setStatus(userDTO.getStatus());
+        updatedUser.setRole(userDTO.getRole());
+
+        data.save(updatedUser);
+        return new responseDTO(HttpStatus.OK, "Usuario actualizado correctamente");
+    }
+
+    public user convertToModelRegister(RequestRegisterUserDTO usuarioDTO) {
+        roles rol = new roles();
+        rol.setid_roles(1); 
+        return new user(
+                0,
+                usuarioDTO.getUsername(),
+                usuarioDTO.getEmail(),
+                usuarioDTO.getPassword(),
+                usuarioDTO.getNumber(),
+                LocalDateTime.now(),
+                true,
+                rol
+        );
+    }
+
+    public user convertToModel(userDTO userDTO) {
+        roles rol = new roles();
+        rol.setid_roles(1);
+        return new user(
                 0,
                 userDTO.get_name(),
                 userDTO.getEmail(),
                 userDTO.get_password(),
                 userDTO.get_number(),
-                LocalDateTime.now(),
-                true);
-        return user;
+                userDTO.get_registration_date(),
+                userDTO.getStatus(),
+                rol
+        );
     }
-
 }
